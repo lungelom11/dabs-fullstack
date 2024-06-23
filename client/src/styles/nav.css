@@ -1,0 +1,52 @@
+/*-------Navbar--------*/
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+.menu {
+  display: flex;
+  list-style-type: none;
+  gap: 15px;
+}
+
+.menu li {
+  cursor: pointer;
+}
+
+.line {
+  height: 2px;
+  background-color: #fff;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 50%;
+}
+
+/*-----Profile-----*/
+.profile-container {
+  width: 300px;
+  padding: 1rem;
+  border-radius: 15px;
+  box-shadow: 1px 1px 1px 1px gray;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.initial {
+  padding: 10px 15px;
+  background-color: #1c38d9;
+  color: aliceblue;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.initial:hover {
+  background-color: #3c57f2;
+}
+
+.menu {
+  display: flex;
+}
