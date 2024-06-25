@@ -6,15 +6,6 @@ form {
 fieldset {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.field {
-  padding: 10px;
-}
-
-button {
-  width: 90%;
-  margin: 1rem auto;
+  justify-content: start;
+  align-items: start;
 }
