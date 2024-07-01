@@ -6,6 +6,8 @@ import PatientBook from "./pages/patient/PatientBook/PatientBook";
 import PatientView from "./pages/patient/PatientView/PatientView";
 import PatientInbox from "./pages/patient/PatientInbox/PatientInbox";
 import PatientProfile from "./pages/patient/PatientProfile/PatientProfile";
+import ProtectedRoute from "./context/ProtectedRoute";
+import Logout from "./Logout";
 
 const App = () => {
   return (
@@ -13,12 +15,20 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/patient" element={<Dashboard />}>
+          <Route
+            path="/patient"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          >
             <Route path="/patient/book" element={<PatientBook />} />
             <Route path="/patient/view" element={<PatientView />} />
             <Route path="/patient/inbox" element={<PatientInbox />} />
             <Route path="/patient/profile" element={<PatientProfile />} />
           </Route>
+          <Route path="/logout" element={<Logout />} />
         </Routes>
       </BrowserRouter>
     </>

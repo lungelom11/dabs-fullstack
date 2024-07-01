@@ -27,30 +27,29 @@ const LoginForm = ({ initialRef }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("Submitted");
-    //   try {
-    //     const response = await axios.post(URL, {
-    //       email,
-    //       password,
-    //     });
-    //     const { access_token } = response.data;
-    //     localStorage.setItem("token", access_token); // Store the token
-    //     // Redirect to protected route
-    //     navigate("/dashboard/pending"); // Replace with your protected route
-    //     toast({
-    //       title: "Logged In Successfully",
-    //       description: "Redirecting to the dashboard",
-    //       status: "success",
-    //       duration: 5000,
-    //       isClosable: true,
-    //     });
-    //   } catch (err) {
-    //     if (err.response.status == 404) {
-    //       setError("User doesn't exist");
-    //     } else if (err.response.status == 403) {
-    //       setError("Invalid login credentials");
-    //     }
-    //   }
+    try {
+      const response = await axios.post(URL, {
+        email,
+        password,
+      });
+      const { access_token } = response.data;
+      localStorage.setItem("patientToken", access_token); // Store the token
+      // Redirect to protected route
+      navigate("/patient"); // Replace with your protected route
+      toast({
+        title: "Logged In Successfully",
+        description: "Redirecting to the dashboard",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    } catch (err) {
+      if (err.response.status == 404) {
+        setError("User doesn't exist");
+      } else if (err.response.status == 403) {
+        setError("Invalid login credentials");
+      }
+    }
   };
   return (
     <>

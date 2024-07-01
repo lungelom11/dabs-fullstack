@@ -10,7 +10,7 @@ const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = useRef(null);
   const finalRef = useRef(null);
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("patientToken");
 
   return (
     <>
