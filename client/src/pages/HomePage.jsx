@@ -1,14 +1,14 @@
-import Nav from "../components/Nav";
-import Hero from "../components/Hero";
-import Footer from "../components/Footer";
+import Hero from "../components/Hero/Hero";
+import Navbar from "../components/Navbar/Navbar";
 
 const HomePage = () => {
   return (
-    <div className="container">
-      <Nav />
-      <Hero />
-      <Footer />
-    </div>
+    <>
+      <div style={{ backgroundColor: "whitesmoke" }}>
+        <Navbar />
+        <Hero />
+      </div>
+    </>
   );
 };
 

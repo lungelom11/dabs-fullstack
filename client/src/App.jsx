@@ -1,17 +1,26 @@
-import "./styles/style.css";
-import ContactPage from "./pages/ContactPage";
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import RegisterPage from "./pages/RegisterPage";
+import "./styles.css";
+import Dashboard from "./layout/Dashboard/Dashboard";
+import PatientBook from "./pages/patient/PatientBook/PatientBook";
+import PatientView from "./pages/patient/PatientView/PatientView";
+import PatientInbox from "./pages/patient/PatientInbox/PatientInbox";
+import PatientProfile from "./pages/patient/PatientProfile/PatientProfile";
 
 const App = () => {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-      </Routes>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/patient" element={<Dashboard />}>
+            <Route path="/patient/book" element={<PatientBook />} />
+            <Route path="/patient/view" element={<PatientView />} />
+            <Route path="/patient/inbox" element={<PatientInbox />} />
+            <Route path="/patient/profile" element={<PatientProfile />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 };

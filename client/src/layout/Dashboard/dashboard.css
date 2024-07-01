@@ -1,0 +1,14 @@
+.dashboard-container {
+  min-height: calc(100vh - 70px);
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  margin-top: 70px;
+  background-color: whitesmoke;
+  /* grid-template-columns: 1fr 4fr; */
+}
+.main-content {
+  flex-grow: 1; /* Main content takes the remaining space */
+  transition: margin-left 0.3s;
+  margin-left: 310px;
+}

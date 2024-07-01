@@ -1,10 +1,28 @@
 from fastapi import FastAPI, APIRouter, HTTPException
 from config import collection
 from database.schemas import all_patients
+from fastapi.middleware.cors import CORSMiddleware
 from database.models import Patient
 
 app = FastAPI()
 router = APIRouter()
+
+#Handling Cors
+origins = [
+    "http://localhost",
+    "http://localhost:8000",
+    "http://localhost:3000",
+    "http://localhost:5173",  # Add your frontend URL here
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 #Creat patient API
 @router.post("/api/patients")
