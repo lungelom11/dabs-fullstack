@@ -1,0 +1,31 @@
+.view-appointment-container {
+  margin-top: 2rem;
+  width: 400px;
+  border-radius: 20px;
+  box-shadow: 2px 3px 2px 2px lightgrey;
+  padding: 15px;
+}
+
+.appointment-data-container {
+  margin: 1rem;
+}
+
+.appointment-data-container .header {
+  background-color: gold;
+  padding-left: 10px;
+}
+.appointment-data {
+  padding: 10px;
+  height: auto;
+}
+.appointment-data p {
+  margin-bottom: 10px;
+}
+.appointment-data .data {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.buttons {
+  margin-top: 1rem;
+}
