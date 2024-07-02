@@ -2,6 +2,7 @@ from fastapi import APIRouter, status, HTTPException
 from ..database import patient_collection
 from ..schemas import Patient
 from ..utils import generate_id, hash
+from .auth import create_access_token
 
 
 router = APIRouter(
@@ -36,18 +37,26 @@ def create_patient(new_patient: Patient):
     try:
         # Check if a patient with the given email already exists
         if patient_collection.find_one({"email": new_patient.email}):
-            raise HTTPException(status_code=403, detail="Email already exists")
-       # Converting new_patient to dictionary and add custom _id
-        patient_data = dict(new_patient)
+            raise HTTPException(status_code=409, detail="Email already exists")
+
+        # Convert new_patient to dictionary and add custom _id
+        patient_data = new_patient.dict()
         patient_data["_id"] = generate_id()
         patient_data["password"] = hash(patient_data["password"])
 
         # Insert into the collection
         resp = patient_collection.insert_one(patient_data)
-        return {"status":201, "message":"patient created successfully"}
 
+        # Create access token
+        access_token = create_access_token(data={"patient_id": str(patient_data["_id"])})
+
+        return {"status": 201, "message": "patient created successfully", "access_token": access_token}
+
+    except HTTPException as http_exc:
+        raise http_exc  # Re-raise HTTP exceptions
     except Exception as e:
-        HTTPException(status_code=500, detail= f"Some error occured, {e}")
+        raise HTTPException(status_code=500, detail=f"Some error occurred: {e}")
+
 
 
 

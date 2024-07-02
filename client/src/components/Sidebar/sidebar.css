@@ -82,6 +82,10 @@ aside.active .sidebar {
   padding: 10px;
 }
 
+aside.active .main-content {
+  margin-left: 100px; /* Adjust this value as needed */
+}
+
 aside.active .sidebar .profile .pro_info {
   margin-right: 0px;
 }

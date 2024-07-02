@@ -12,3 +12,9 @@
   transition: margin-left 0.3s;
   margin-left: 310px;
 }
+
+.main-content-active {
+  flex-grow: 1; /* Main content takes the remaining space */
+  transition: margin-left 0.3s;
+  margin-left: 100px;
+}

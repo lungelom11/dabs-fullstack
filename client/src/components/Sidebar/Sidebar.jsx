@@ -1,11 +1,9 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
+
 import { Link, useLocation } from "react-router-dom";
-import "./sidebar.css";
 
-const Sidebar = () => {
-  const [isActive, setIsActive] = useState(false);
+const Sidebar = ({ isActive, setIsActive }) => {
   const location = useLocation();
-
   const toggleSection = () => {
     setIsActive(!isActive);
   };

@@ -21,12 +21,13 @@ const LoginForm = ({ initialRef }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const toast = useToast();
-
+  const [isLoading, setIsLoading] = useState(false);
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await axios.post(URL, {
         email,
@@ -43,12 +44,14 @@ const LoginForm = ({ initialRef }) => {
         duration: 5000,
         isClosable: true,
       });
+      setIsLoading(false);
     } catch (err) {
       if (err.response.status == 404) {
         setError("User doesn't exist");
       } else if (err.response.status == 403) {
         setError("Invalid login credentials");
       }
+      setIsLoading(false);
     }
   };
   return (
@@ -87,7 +90,9 @@ const LoginForm = ({ initialRef }) => {
           </FormControl>
         </ModalBody>
         <ModalFooter>
-          <button className="login-btn">Login</button>
+          <Button type="submit" className="login-btn" isLoading={isLoading}>
+            Login
+          </Button>
         </ModalFooter>
       </form>
     </>

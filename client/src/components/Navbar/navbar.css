@@ -47,6 +47,25 @@ nav {
   color: white;
 }
 
+.register-btn {
+  padding: 5px;
+  border-radius: 10px;
+  color: white;
+  border: 2px solid #2713fc;
+  margin-right: 10px;
+  width: 100px;
+  background-color: #2713fc;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.register-btn:hover {
+  border: 2px solid #2713fc;
+  background-color: transparent;
+  color: black;
+}
+
 .menu-link {
   text-decoration: none;
   color: black;

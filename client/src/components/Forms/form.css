@@ -1,0 +1,41 @@
+.register-container {
+  min-height: calc(100vh - 70px);
+  margin-top: 70px;
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  max-width: 1000px;
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: start;
+  height: 400px;
+  overflow-y: scroll;
+  gap: 2rem;
+  position: relative;
+}
+
+.form-img {
+  max-width: 400px;
+  margin: 2rem 1rem;
+  position: fixed;
+}
+
+.form {
+  padding: 10px;
+  margin-left: 500px;
+}
+
+.personal-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 10px;
+}

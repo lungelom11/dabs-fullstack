@@ -1,19 +1,24 @@
 from pydantic import BaseModel, Field, EmailStr
 from typing import Optional
 
+class Address(BaseModel):
+    street: str
+    suburb: str
+    city: str
+    code: str
+
 class Patient(BaseModel):
     firstname: str
     lastname: str
     email: EmailStr
-    address: str
-    phone: str  # Represent phone as a string
+    idNumber: str
+    phone: str
     password: str
-    id_number: Optional[str]
-    medical_history: Optional[str]
-    current_medications: Optional[str]
-    emergency_contact_name: Optional[str]
-    emergency_contact_phone: Optional[str]
-    insurance_details: Optional[str]
+    address: Address
+    currentMedications: Optional[str]
+    medicalHistory: Optional[str]
+    emergencyContactName: str
+    emergencyContactPhone: str
 
 class PatientLogin(BaseModel):
     email:EmailStr

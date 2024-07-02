@@ -57,9 +57,14 @@ const Navbar = () => {
                     </div>
                   </div>
                 ) : (
-                  <button className="login-btn" onClick={onOpen}>
-                    Login
-                  </button>
+                  <>
+                    <button className="login-btn" onClick={onOpen}>
+                      Login
+                    </button>
+                    <Link to="/register">
+                      <button className="register-btn">Register</button>
+                    </Link>
+                  </>
                 )}
               </li>
               <Modal
