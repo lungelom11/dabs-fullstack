@@ -40,7 +40,6 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
                                           detail=f"Could not validate credentials", headers={"WWW-Authenticate": "Bearer"})
 
     token = verify_access_token(token, credentials_exception)
-    print(token)
     user = patient_collection.find_one({"_id": token.id})
 
     return user

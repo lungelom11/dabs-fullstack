@@ -39,3 +39,14 @@
   gap: 1rem;
   margin-bottom: 10px;
 }
+
+.register-link {
+  margin: 1rem auto;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.register-link span {
+  color: blue;
+  text-decoration: underline;
+}

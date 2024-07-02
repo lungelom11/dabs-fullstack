@@ -1,0 +1,26 @@
+.profile-container {
+  padding: 20px;
+  width: 600px;
+  margin: 1rem auto;
+  border: 1px solid gray;
+  border-radius: 20px;
+}
+
+.update-form {
+  margin-bottom: 10px;
+}
+
+.update-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.2rem 0;
+}
+
+.loading {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

@@ -24,6 +24,20 @@ class PatientLogin(BaseModel):
     email:EmailStr
     password: str
 
-class TokenData(BaseModel):
+class Token(BaseModel):
     access_token: str
     token_type: str
+
+class TokenData(BaseModel):
+    id: Optional[str] = None
+
+class UpdatePatient(BaseModel):
+    firstname: str
+    lastname: str
+    email: EmailStr
+    idNumber: str
+    phone: str
+    currentMedications: Optional[str]
+    medicalHistory: Optional[str]
+    emergencyContactName: str
+    emergencyContactPhone: str

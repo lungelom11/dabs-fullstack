@@ -11,22 +11,22 @@ const Sidebar = ({ isActive, setIsActive }) => {
   const navigationLinks = [
     {
       href: "/patient",
-      iconClass: "fa-regular fa-building",
+      iconClass: "fa-solid fa-house-user",
       text: "Home",
     },
     {
       href: "/patient/book",
-      iconClass: "fa-regular fa-hard-drive",
+      iconClass: "fa-regular fa-calendar-check",
       text: "Book Appointment",
     },
     {
       href: "/patient/view",
-      iconClass: "fa-regular fa-lightbulb",
+      iconClass: "fa-solid fa-pen-to-square",
       text: "View Appointment",
     },
     {
       href: "/patient/inbox",
-      iconClass: "fa-regular fa-user",
+      iconClass: "fa-solid fa-inbox",
       text: "Inbox",
       count: 11,
     },

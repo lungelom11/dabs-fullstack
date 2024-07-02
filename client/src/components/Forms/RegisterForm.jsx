@@ -300,15 +300,11 @@ const RegisterForm = () => {
             <Button
               isLoading={isLoading}
               loadingText="Submitting"
-              colorScheme="teal"
-              variant="outline"
+              colorScheme="blue"
               size="md"
+              bgColor={"blue"}
               height="48px"
               width="150px"
-              border="2px"
-              backgroundColor="white"
-              borderColor="#2713fc"
-              color="#2713fc"
               type="submit"
             >
               Register

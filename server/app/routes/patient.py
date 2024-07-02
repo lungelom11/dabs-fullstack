@@ -1,8 +1,9 @@
-from fastapi import APIRouter, status, HTTPException
+from fastapi import APIRouter, status, HTTPException,Depends
 from ..database import patient_collection
-from ..schemas import Patient
+from ..schemas import Patient, UpdatePatient
 from ..utils import generate_id, hash
 from .auth import create_access_token
+from ..oath2 import get_current_user
 
 
 router = APIRouter(
@@ -19,17 +20,18 @@ def get_patients():
 
     return {"message": "returning all patients"}
 
-#Get Single patient
+#Get Single patient current_user: int = Depends(get_current_user)
 @router.get("/{id}")
-def get_patient(id: str):
+def get_patient(id: str, current_patient: str = Depends(get_current_user)):
 
     patient = patient_collection.find_one({"_id": id})
-
-    if patient:
-        patient["_id"] = str(patient["_id"])
-        return {"patient": patient}
+    
+    if current_patient:
+        return current_patient
     else:
         raise HTTPException(status_code=404, detail=f"patient with id {id} not found")
+   
+        
 
 #Create new Patient
 @router.post("/", status_code=status.HTTP_201_CREATED)
@@ -62,10 +64,10 @@ def create_patient(new_patient: Patient):
 
 #Update patient route
 @router.put("/{id}")
-def update_patient(id: str, updated_patient: Patient):
+def update_patient(id: str, updated_patient:UpdatePatient, current_patient: str = Depends(get_current_user) ):
  
     result = patient_collection.update_one(
-        {"_id": id}, {"$set": dict(updated_patient)}
+        {"_id": current_patient["_id"]}, {"$set": dict(updated_patient)}
     )
     if result.matched_count == 0:
         raise HTTPException(status_code=404, detail="Client not found")

@@ -11,7 +11,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const LoginForm = ({ initialRef }) => {
@@ -90,11 +90,24 @@ const LoginForm = ({ initialRef }) => {
           </FormControl>
         </ModalBody>
         <ModalFooter>
-          <Button type="submit" className="login-btn" isLoading={isLoading}>
+          <Button
+            type="submit"
+            bgColor={"blue"}
+            size={"md"}
+            color={"white"}
+            isLoading={isLoading}
+            colorScheme="blue"
+          >
             Login
           </Button>
         </ModalFooter>
       </form>
+      <p className="register-link">
+        Not registered yet? Register{" "}
+        <span>
+          <Link to="/register">here</Link>
+        </span>
+      </p>
     </>
   );
 };

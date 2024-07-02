@@ -5,12 +5,14 @@ import ModalBody from "../ModalBody";
 import Logo from "../../images/logo.png";
 import { useDisclosure } from "@chakra-ui/react";
 import { useRef } from "react";
+import usePatientData from "../../hooks/usePatientData";
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = useRef(null);
   const finalRef = useRef(null);
   const token = localStorage.getItem("patientToken");
+  const { patientData } = usePatientData();
 
   return (
     <>
@@ -52,8 +54,12 @@ const Navbar = () => {
                       />
                     </div>
                     <div className="pro_info">
-                      <h4>Patient Name</h4>
-                      <p>patient@dabs.com</p>
+                      <h4>
+                        {patientData
+                          ? `${patientData.firstname} ${patientData.lastname}`
+                          : "Patient name"}
+                      </h4>
+                      <p>{patientData ? patientData.email : "email"}</p>
                     </div>
                   </div>
                 ) : (
