@@ -15,7 +15,7 @@ const Hero = () => {
             repudiandae sint id nam excepturi. Tenetur facere dolores provident
             vero ut?
           </p>
-          <Link to="/patient" className="hero-btn">
+          <Link to="/patient/book" className="hero-btn">
             Book Now
           </Link>
         </div>

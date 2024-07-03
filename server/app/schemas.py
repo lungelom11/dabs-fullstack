@@ -41,3 +41,20 @@ class UpdatePatient(BaseModel):
     medicalHistory: Optional[str]
     emergencyContactName: str
     emergencyContactPhone: str
+
+
+class Appointment(BaseModel):
+    patient_id: str
+    doc_id: str
+    appointment_date: str
+    appointment_time: str
+    reason: str
+    status: str
+    notes: Optional[str] = None
+
+class AppointmentUpdate(BaseModel):
+    appointment_date: str
+    appointment_time: str
+    reason: str
+    status: str
+    notes: Optional[str] = None

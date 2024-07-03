@@ -1,10 +1,8 @@
 from fastapi import FastAPI
-from .routes import patient,auth
+from .routes import appointment, patient, auth
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
-
-
 
 origins = [
     "http://localhost",
@@ -22,13 +20,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-
-
 @app.get("/")
 def home():
-    return {"message":"Welcome to DABS server"}
+    return {"message": "Welcome to DABS server"}
 
-
+app.include_router(appointment.router)
 app.include_router(patient.router)
 app.include_router(auth.router)

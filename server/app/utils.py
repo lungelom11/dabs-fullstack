@@ -9,6 +9,9 @@ def generate_id():
     id = "P" + str(random_number)
     return id
 
+def generate_appointment_id():
+    random_id = random.randint(10000,99999)
+    return random_id
 
 
 def hash(password: str):

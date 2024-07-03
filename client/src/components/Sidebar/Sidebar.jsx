@@ -10,7 +10,7 @@ const Sidebar = ({ isActive, setIsActive }) => {
 
   const navigationLinks = [
     {
-      href: "/patient",
+      href: "/patient/home",
       iconClass: "fa-solid fa-house-user",
       text: "Home",
     },

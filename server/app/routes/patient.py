@@ -18,8 +18,6 @@ def get_patients():
 
     return {"patients": patients}
 
-    return {"message": "returning all patients"}
-
 #Get Single patient current_user: int = Depends(get_current_user)
 @router.get("/{id}")
 def get_patient(id: str, current_patient: str = Depends(get_current_user)):

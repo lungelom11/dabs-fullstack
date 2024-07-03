@@ -88,6 +88,9 @@ const RegisterForm = () => {
           isClosable: true,
         });
         setIsLoading(false);
+      } else {
+        console.log(err);
+        setIsLoading(false);
       }
     }
   };

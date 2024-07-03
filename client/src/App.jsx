@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import "./styles.css";
 import Dashboard from "./layout/Dashboard/Dashboard";
+import PatientHome from "./pages/patient/PatientHome/PatientHome";
 import PatientBook from "./pages/patient/PatientBook/PatientBook";
 import PatientView from "./pages/patient/PatientView/PatientView";
 import PatientInbox from "./pages/patient/PatientInbox/PatientInbox";
@@ -24,6 +25,7 @@ const App = () => {
               </ProtectedRoute>
             }
           >
+            <Route path="/patient/home" element={<PatientHome />} />
             <Route path="/patient/book" element={<PatientBook />} />
             <Route path="/patient/view" element={<PatientView />} />
             <Route path="/patient/inbox" element={<PatientInbox />} />

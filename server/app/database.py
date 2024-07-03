@@ -9,5 +9,5 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 
 db = client.dabsdb
 patient_collection = db["patients"]
-bookings_collection = db["bookings"]
+appointment_collection = db["bookings"]
 admin_collection = db["admin"]
