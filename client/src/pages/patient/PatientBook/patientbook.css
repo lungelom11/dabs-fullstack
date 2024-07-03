@@ -1,0 +1,65 @@
+.patient-book-container {
+  width: 100%;
+  min-height: 100%;
+  padding: 10px;
+  padding-bottom: 20px;
+}
+
+.book-appointment-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  height: 400px;
+}
+
+.calendar-container {
+  border: 2px solid green;
+}
+
+.time-pick-container {
+  margin-left: 20px;
+}
+
+.my-appointment-section {
+  padding: 20px;
+}
+
+.time-header,
+.calendar-header {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.time-header i,
+.calendar-header i {
+  margin-right: 10px;
+}
+
+.book-input {
+  overflow-y: scroll;
+  height: 270px;
+  padding-bottom: 10px;
+}
+
+.slots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.slots p {
+  padding: 5px;
+  border: 1px solid gray;
+  margin: 5px;
+  border-radius: 15px;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 1px 1px 1px 1px lightgray;
+  cursor: pointer;
+}
+
+.slots p:hover {
+  background-color: green;
+}
+
+.book-btn {
+  text-align: center;
+  margin-top: 2rem;
+}

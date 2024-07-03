@@ -1,8 +1,8 @@
 .dashboard-container {
   min-height: calc(100vh - 70px);
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
   display: flex;
+  margin: 0 auto;
   margin-top: 70px;
   background-color: whitesmoke;
   /* grid-template-columns: 1fr 4fr; */

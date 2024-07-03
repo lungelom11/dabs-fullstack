@@ -36,7 +36,7 @@ const LoginForm = ({ initialRef }) => {
       const { access_token } = response.data;
       localStorage.setItem("patientToken", access_token); // Store the token
       // Redirect to protected route
-      navigate("/patient"); // Replace with your protected route
+      navigate("/patient/home"); // Replace with your protected route
       toast({
         title: "Logged In Successfully",
         description: "Redirecting to the dashboard",

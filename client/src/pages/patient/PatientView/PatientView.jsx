@@ -1,7 +1,16 @@
 import "./patientview.css";
-import { Button, Stack } from "@chakra-ui/react";
+import {
+  Button,
+  Modal,
+  ModalOverlay,
+  Stack,
+  useDisclosure,
+} from "@chakra-ui/react";
+import ModalInformation from "./ModalContent";
 
 const PatientView = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <>
       <div className="view-appointment-container">
@@ -31,7 +40,7 @@ const PatientView = () => {
           </div>
           <div className="buttons">
             <Stack spacing={5}>
-              <Button colorScheme="green" variant="outline">
+              <Button colorScheme="green" variant="outline" onClick={onOpen}>
                 Edit Appointment
               </Button>
               <Button colorScheme="red" variant="outline">
@@ -41,8 +50,42 @@ const PatientView = () => {
           </div>
         </div>
       </div>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalInformation onClose={onClose} />
+      </Modal>
     </>
   );
 };
 
 export default PatientView;
+
+{
+  /* <AlertDialog
+isOpen={isAlertOpen}
+leastDestructiveRef={cancelRef}
+onClose={onAlertClose}
+>
+<AlertDialogOverlay>
+  <AlertDialogContent>
+    <AlertDialogHeader fontSize="lg" fontWeight="bold">
+      Delete Customer
+    </AlertDialogHeader>
+
+    <AlertDialogBody>
+      Are you sure? You can not undo this action afterwards.
+    </AlertDialogBody>
+
+    <AlertDialogFooter>
+      <Button ref={cancelRef} onClick={onAlertClose}>
+        Cancel
+      </Button>
+      <Button colorScheme="red" onClick={onAlertClose} ml={3}>
+        Delete
+      </Button>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialogOverlay>
+</AlertDialog> */
+}

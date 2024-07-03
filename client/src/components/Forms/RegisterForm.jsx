@@ -76,7 +76,7 @@ const RegisterForm = () => {
           isClosable: true,
         });
         setIsLoading(false);
-        navigate("/patient");
+        navigate("/patient/home");
       }
     } catch (err) {
       if (err.response.status == 409) {
