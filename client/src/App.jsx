@@ -10,31 +10,35 @@ import PatientProfile from "./pages/patient/PatientProfile/PatientProfile";
 import ProtectedRoute from "./context/ProtectedRoute";
 import Logout from "./Logout";
 import Register from "./components/Forms/RegisterForm";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const App = () => {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route
-            path="/patient"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          >
-            <Route path="/patient/home" element={<PatientHome />} />
-            <Route path="/patient/book" element={<PatientBook />} />
-            <Route path="/patient/view" element={<PatientView />} />
-            <Route path="/patient/inbox" element={<PatientInbox />} />
-            <Route path="/patient/profile" element={<PatientProfile />} />
-          </Route>
-          <Route path="/register" element={<Register />} />
-          <Route path="/logout" element={<Logout />} />
-        </Routes>
-      </BrowserRouter>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route
+              path="/patient"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            >
+              <Route path="/patient/home" element={<PatientHome />} />
+              <Route path="/patient/book" element={<PatientBook />} />
+              <Route path="/patient/view" element={<PatientView />} />
+              <Route path="/patient/inbox" element={<PatientInbox />} />
+              <Route path="/patient/profile" element={<PatientProfile />} />
+            </Route>
+            <Route path="/register" element={<Register />} />
+            <Route path="/logout" element={<Logout />} />
+          </Routes>
+        </BrowserRouter>
+      </LocalizationProvider>
     </>
   );
 };

@@ -7,12 +7,13 @@
 
 .book-appointment-container {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   height: 400px;
 }
 
 .calendar-container {
-  border: 2px solid green;
+  padding: 0 10px;
+  position: relative;
 }
 
 .time-pick-container {
@@ -31,12 +32,13 @@
 .time-header i,
 .calendar-header i {
   margin-right: 10px;
+  color: #2e76bd;
 }
 
 .book-input {
   overflow-y: scroll;
   height: 270px;
-  padding-bottom: 10px;
+  padding: 20px;
 }
 
 .slots {
@@ -62,4 +64,38 @@
 .book-btn {
   text-align: center;
   margin-top: 2rem;
+}
+
+.info-icon {
+  position: absolute;
+  right: 0;
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+.green,
+.gold,
+.red {
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+}
+
+.green .color {
+  background-color: green;
+}
+.green .color,
+.gold .color,
+.red .color {
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+}
+
+.gold .color {
+  background-color: gold;
+}
+
+.red .color {
+  background-color: red;
 }
