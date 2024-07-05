@@ -13,6 +13,10 @@ def generate_appointment_id():
     random_id = random.randint(10000,99999)
     return random_id
 
+def generate_admin_id():
+    random_id = random.randint(1000000,9999999)
+    return random_id
+
 
 def hash(password: str):
     return pwd_context.hash(password)

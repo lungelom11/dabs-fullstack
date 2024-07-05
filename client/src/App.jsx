@@ -12,6 +12,7 @@ import Logout from "./Logout";
 import Register from "./components/Forms/RegisterForm";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import AdminHome from "./pages/admin/AdminHome"
 
 const App = () => {
   return (
@@ -36,6 +37,8 @@ const App = () => {
             </Route>
             <Route path="/register" element={<Register />} />
             <Route path="/logout" element={<Logout />} />
+
+            <Route path="/admin" element= {<AdminHome />} />
           </Routes>
         </BrowserRouter>
       </LocalizationProvider>

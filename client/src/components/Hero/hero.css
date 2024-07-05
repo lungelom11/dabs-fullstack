@@ -15,7 +15,20 @@
   gap: 2rem 0;
 }
 
-.hero-content p {
+.admin-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  gap: 2rem 0;
+  margin: auto;
+  min-height: calc(100vh - 70px);
+  margin-top: 70px;
+  max-width: 600px;
+}
+
+.hero-content p, .admin-content p {
   font-size: 1.3rem;
   font-weight: 600;
 }

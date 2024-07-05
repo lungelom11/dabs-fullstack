@@ -58,3 +58,11 @@ class AppointmentUpdate(BaseModel):
     reason: str
     status: str
     notes: Optional[str] = None
+
+class Admin(BaseModel):
+    firstname: str
+    lastname: str
+    username: str
+    email: Optional[str] = None
+    password: str
+    role: str

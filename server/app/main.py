@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .routes import appointment, patient, auth
+from .routes import appointment, patient, auth, admin
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -27,3 +27,4 @@ def home():
 app.include_router(appointment.router)
 app.include_router(patient.router)
 app.include_router(auth.router)
+app.include_router(admin.router)
