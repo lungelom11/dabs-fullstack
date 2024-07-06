@@ -99,3 +99,7 @@
 .red .color {
   background-color: red;
 }
+
+.selected-slot{
+  background-color: green;
+}

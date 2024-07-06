@@ -13,6 +13,12 @@ import Register from "./components/Forms/RegisterForm";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import AdminHome from "./pages/admin/AdminHome"
+import AdminDashboard from "./layout/AdminDashboard/AdminDashboard"
+import SuperAdminHome from "./pages/admin/SuperAdmin/SuperAdminHome/SuperAdminHome";
+import ManageUsers from "./pages/admin/SuperAdmin/ManageUsers/ManageUsers";
+import SuperAdminInbox from "./pages/admin/SuperAdmin/SuperAdminInbox/SuperAdminInbox";
+import AdminProtectedRoutes from "./context/AdminProtectedRoutes"
+
 
 const App = () => {
   return (
@@ -37,8 +43,13 @@ const App = () => {
             </Route>
             <Route path="/register" element={<Register />} />
             <Route path="/logout" element={<Logout />} />
-
-            <Route path="/admin" element= {<AdminHome />} />
+            <Route path="/admin-area" element={<AdminHome/>}/>
+            <Route path="/admin" element= {<AdminProtectedRoutes><AdminDashboard /></AdminProtectedRoutes>}>
+              <Route path="/admin/home" element={<SuperAdminHome />} />
+              <Route path="/admin/users" element={<ManageUsers />} />
+              <Route path="/admin/inbox" element={<SuperAdminInbox />} />
+            </Route>
+            
           </Routes>
         </BrowserRouter>
       </LocalizationProvider>

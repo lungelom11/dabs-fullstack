@@ -11,12 +11,19 @@ router = APIRouter(
 #Get all registered admins
 @router.get("/")
 def get_admins():
-    return {"message":"List of registered admins"}
+    admin = list(admin_collection.find())
+
+    return admin
 
 #Returning single admin
 @router.get("/{id}")
-def get_admin(id: str):
-    return {"message":"Returning single admin"}
+def get_admin(id: int):
+    admin = admin_collection.find_one({"_id": id})
+    if admin:
+        return admin
+    else:
+        raise HTTPException(status_code=404, detail=f"admin with id {id} not found")
+
 
 #Registering new admin
 @router.post("/", status_code=status.HTTP_201_CREATED)
@@ -38,6 +45,11 @@ def create_admin(new_admin: Admin):
         return {"status": 201, "message": "admin created successfully", "data": admin_data}
 
 #Delete admin
-@router.delete("/{id}")
-def delete_admin(id: str):
-    return {"message":"Deleting admin"}
+@router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_admin(id: int):
+    result = admin_collection.delete_one({"_id": id})
+
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Client not found")
+        
+    return 

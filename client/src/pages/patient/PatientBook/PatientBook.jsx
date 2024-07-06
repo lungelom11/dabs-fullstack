@@ -14,7 +14,9 @@ import {
   TableContainer,
   Tbody,
   Td,
+  Stack,
   Textarea,
+  Select,
   Th,
   Thead,
   Tr,
@@ -26,7 +28,8 @@ import BookCalendar from "../../../components/Calendar/BookCalendar";
 
 const PatientBook = () => {
   const [timeSlot, setTimeSlot] = useState();
-
+  const [selectedSlot, setSelectedSlot] = useState();
+  const [background, setBackground] = useState(false)
   useEffect(() => {
     getTime();
   }, []);
@@ -52,6 +55,12 @@ const PatientBook = () => {
 
     setTimeSlot(timeList);
   };
+
+  const handleTimeSelect = (e) =>{
+    setSelectedSlot(e.target.textContent)
+    setBackground(!background)
+    console.log(e.target.classList)
+  }
 
   return (
     <>
@@ -88,6 +97,8 @@ const PatientBook = () => {
               Select Date
             </span>
             <BookCalendar />
+
+            <h3>Selected slot: {selectedSlot} </h3>
           </div>
           <div className="time-pick-container">
             <span className="time-header">
@@ -95,17 +106,27 @@ const PatientBook = () => {
               Select Time
             </span>
 
-            <div className="book-input">
-              <div className="slots">
+            <div className="book-input" style={{marginBottom: "10px"}}>
+              <div className="slots" >
                 {timeSlot?.map((slot, index) => (
-                  <p key={index}> {slot.time} </p>
+                  <p key={index} onClick={handleTimeSelect} className={background ? "selected-slot": ""}> {slot.time} </p>
                 ))}
               </div>
+                <Stack spacing={5}>
+                <FormControl>
+                <FormLabel>Reason:</FormLabel>
+                <Select placeholder='Select option'>
+                    <option value='option1'>Option 1</option>
+                    <option value='option2'>Option 2</option>
+                    <option value='option3'>Option 3</option>
+                </Select>
+              </FormControl>
 
               <FormControl>
                 <FormLabel>Note: </FormLabel>
                 <Textarea placeholder="Enter note (Optional)" />
               </FormControl>
+                </Stack>
             </div>
 
             <div className="book-btn">
