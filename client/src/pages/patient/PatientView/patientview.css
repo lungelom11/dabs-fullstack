@@ -24,6 +24,10 @@
 .appointment-data .data {
   font-size: 1.1rem;
   font-weight: 700;
+  margin-right: 5px;
+}
+.appointment-data .status{
+  background-color: gold;
 }
 
 .buttons {

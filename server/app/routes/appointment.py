@@ -17,12 +17,12 @@ def get_appointments():
 
 # Get one appointment
 @router.get("/{id}")
-def get_appointment(id: int):
-    appointment = appointment_collection.find_one({"_id": id})
+def get_appointment(id: str):
+    appointment = appointment_collection.find_one({"patient_id": id})
     if appointment:
         return appointment
     else:
-        raise HTTPException(status_code=404, detail=f"appointment with id {id} not found")
+        raise HTTPException(status_code=404, detail=f"appointment not found")
 
 # Create/Book appointment
 @router.post("/", status_code=status.HTTP_201_CREATED)

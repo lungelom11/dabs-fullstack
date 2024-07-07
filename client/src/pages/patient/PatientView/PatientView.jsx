@@ -7,37 +7,42 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import ModalInformation from "./ModalContent";
+import useAppointmentData from "../../../hooks/useAppointmentData"
 
 const PatientView = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {appointmentData} = useAppointmentData()
 
   return (
     <>
       <div className="view-appointment-container">
         <div className="appointment-data-container">
-          <div className="header">
-            <h2>P79332234</h2>
+          {appointmentData ? <><div className="header">
+            <h2>{appointmentData.patient_id}</h2>
           </div>
           <div className="appointment-data">
             <p>
-              <span className="data">Appointment ID:</span>
+              <span className="data">Appointment ID:</span> {appointmentData._id}
             </p>
             <p>
-              <span className="data">Date:</span>
+              <span className="data">Date:</span>{appointmentData.appointment_date}
             </p>
             <p>
               <span className="data">Time:</span>
+              {appointmentData.appointment_time}
             </p>
             <p>
               <span className="data">Reason:</span>
+              {appointmentData.reason}
             </p>
             <p>
               <span className="data">Status:</span>
+              <span className="status">{appointmentData.status}</span>
             </p>
             <p>
-              <span className="data">Notes:</span>
+              <span className="data">Notes:</span>{appointmentData.notes}
             </p>
-          </div>
+          </div></>: <p>Loading...</p>}
           <div className="buttons">
             <Stack spacing={5}>
               <Button colorScheme="green" variant="outline" onClick={onOpen}>
