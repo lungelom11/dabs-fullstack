@@ -18,6 +18,7 @@ import SuperAdminHome from "./pages/admin/SuperAdmin/SuperAdminHome/SuperAdminHo
 import ManageUsers from "./pages/admin/SuperAdmin/ManageUsers/ManageUsers";
 import SuperAdminInbox from "./pages/admin/SuperAdmin/SuperAdminInbox/SuperAdminInbox";
 import AdminProtectedRoutes from "./context/AdminProtectedRoutes"
+import AdminLogout from "./AdminLogout"
 
 
 const App = () => {
@@ -44,10 +45,15 @@ const App = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/admin-area" element={<AdminHome/>}/>
-            <Route path="/admin" element= {<AdminProtectedRoutes><AdminDashboard /></AdminProtectedRoutes>}>
+            <Route 
+              path="/admin" 
+              element= {<AdminProtectedRoutes>
+              <AdminDashboard />
+              </AdminProtectedRoutes>}>
               <Route path="/admin/home" element={<SuperAdminHome />} />
               <Route path="/admin/users" element={<ManageUsers />} />
               <Route path="/admin/inbox" element={<SuperAdminInbox />} />
+              <Route path="/admin/logout" element={<AdminLogout />} />
             </Route>
             
           </Routes>

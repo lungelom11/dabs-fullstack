@@ -59,8 +59,19 @@ nav {
   font-size: 1.1rem;
   font-weight: 600;
 }
-
-.register-btn:hover {
+.admin-btn{
+  padding: 7px;
+  border-radius: 10px;
+  color: white;
+  border: 2px solid #2713fc;
+  margin-right: 10px;
+  width: 150px;
+  background-color: #2713fc;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.register-btn:hover,.admin-btn:hover {
   border: 2px solid #2713fc;
   background-color: transparent;
   color: black;

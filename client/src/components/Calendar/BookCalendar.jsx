@@ -1,8 +1,7 @@
+/* eslint-disable react/prop-types */
 import "./calendar.css";
 import { DateCalendar } from "@mui/x-date-pickers";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useState } from "react";
-import dayjs from "dayjs";
 
 const theme = createTheme({
   typography: {
@@ -13,14 +12,14 @@ const theme = createTheme({
   },
 });
 
-const BookCalendar = () => {
-  const [selectedDate, setSelectedDate] = useState(dayjs("11 July 2024"));
+const BookCalendar = ({appointment_date,setAppointmentDate}) => {
+  
   return (
     <div className="calendar">
       <ThemeProvider theme={theme}>
         <DateCalendar
-          value={selectedDate}
-          onChange={(newValue) => setSelectedDate(newValue)}
+          value={appointment_date}
+          onChange={(newValue) => setAppointmentDate(newValue)}
         />
       </ThemeProvider>
     </div>

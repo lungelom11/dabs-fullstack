@@ -43,3 +43,28 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
     user = patient_collection.find_one({"_id": token.id})
 
     return user
+
+
+#Admin oath2
+
+def create_admin_access_token(data: dict):
+    to_encode = data.copy()
+
+    expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    to_encode.update({"exp": expire})
+
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+
+    return encoded_jwt
+
+def verify_admin_access_token(token: str, credentials_exception):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        id: int = payload.get("admin_id")
+        if id is None:
+            raise credentials_exception
+        token_data = TokenData(id=id)
+    except JWTError:
+        raise credentials_exception
+
+    return token_data

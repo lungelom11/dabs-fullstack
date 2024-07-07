@@ -34,9 +34,9 @@ import {
           password,
         });
         const { access_token } = response.data;
-        localStorage.setItem("patientToken", access_token); // Store the token
+        localStorage.setItem("adminToken", access_token); // Store the token
         // Redirect to protected route
-        navigate("/patient/home"); // Replace with your protected route
+        navigate("/admin/home"); // Replace with your protected route
         toast({
           title: "Logged In Successfully",
           description: "Redirecting to the dashboard",
@@ -47,7 +47,7 @@ import {
         setIsLoading(false);
       } catch (err) {
         if (err.response.status == 404) {
-          setError("User doesn't exist");
+          setError("Admin not found");
         } else if (err.response.status == 403) {
           setError("Invalid login credentials");
         }
@@ -65,7 +65,7 @@ import {
                 focusBorderColor="#2713fc"
                 ref={initialRef}
                 placeholder="Username"
-                value={password}
+                value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
             </FormControl>

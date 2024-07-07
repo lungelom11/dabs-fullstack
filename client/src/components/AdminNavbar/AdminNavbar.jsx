@@ -1,8 +1,8 @@
 import "../Navbar/navbar.css";
 import { Link } from "react-router-dom";
-import { Button, Modal, ModalOverlay, useDisclosure } from "@chakra-ui/react";
+import { Modal, ModalOverlay, useDisclosure } from "@chakra-ui/react";
 // import { Modal, ModalOverlay } from "@chakra-ui/react";
-import AdminForm from "../AdminModal";
+import ModalBody from "../AdminModal";
 import Logo from "../../images/logo.png";
 import { useRef } from "react";
 
@@ -10,6 +10,7 @@ const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = useRef(null);
   const finalRef = useRef(null);
+  const token = localStorage.getItem("adminToken")
 
   return (
     <>
@@ -32,9 +33,23 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-              <Button colorScheme="blue" onClick={onOpen}>
+                {token ? (<div className="profile">
+                    <div className="pro_img">
+                      <img
+                        src="https://i.imgur.com/rgiY5VZ.png"
+                        alt="profile_picture"
+                      />
+                    </div>
+                    <div className="pro_info">
+                      <h4>
+                        Dr Malen
+                      </h4>
+                      <p>davidmalen@gmail.com</p>
+                    </div>
+                  </div>) : <button className="admin-btn" onClick={onOpen}>
                   Admin Login
-                </Button>
+                </button> }
+              
               </li>
               <Modal
                 initialFocusRef={initialRef}
@@ -43,7 +58,7 @@ const Navbar = () => {
                 onClose={onClose}
               >
                 <ModalOverlay />
-                <AdminForm initialRef={initialRef} />
+                <ModalBody initialRef={initialRef} />
               </Modal>
             </ul>
           </div>

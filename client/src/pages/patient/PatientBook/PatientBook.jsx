@@ -25,15 +25,37 @@ import { Link } from "react-router-dom";
 import { InfoIcon } from "@chakra-ui/icons";
 import "./patientbook.css";
 import BookCalendar from "../../../components/Calendar/BookCalendar";
+import dayjs from "dayjs";
 
 const PatientBook = () => {
   const [timeSlot, setTimeSlot] = useState();
-  const [selectedSlot, setSelectedSlot] = useState();
-  const [background, setBackground] = useState(false)
+  const [appointment_date, setAppointmentDate] = useState(dayjs("11 July 2024"));
+  const [appointment_time, setAppointmentTime] = useState();
+  const [selectedReason, setSelectedReason] = useState('');
+  const [status,setStatus] = useState()
+  const [reason,setReason] = useState()
+  const [notes,setNotes] = useState()
+
+  const selectedDate = dayjs(appointment_date).format("DD MMM YYYY")
+
+  const appointmentData = {
+    patient_id: "P2321213",
+    doc_id: "D2311",
+    appointment_date: selectedDate,
+    appointment_time,
+    reason,
+    status,
+    notes
+  }
+
   useEffect(() => {
     getTime();
   }, []);
 
+  const handleReasonChange = (event) => {
+    setSelectedReason(event.target.value);
+  };
+  
   const getTime = () => {
     const timeList = [];
     for (let i = 8; i <= 12; i++) {
@@ -56,11 +78,6 @@ const PatientBook = () => {
     setTimeSlot(timeList);
   };
 
-  const handleTimeSelect = (e) =>{
-    setSelectedSlot(e.target.textContent)
-    setBackground(!background)
-    console.log(e.target.classList)
-  }
 
   return (
     <>
@@ -96,9 +113,9 @@ const PatientBook = () => {
               <i className="fa-regular fa-calendar"></i>
               Select Date
             </span>
-            <BookCalendar />
+            <BookCalendar appointment_date={appointment_date} setAppointmentDate={setAppointmentDate}/>
 
-            <h3>Selected slot: {selectedSlot} </h3>
+            <h3>Selected slot:</h3>
           </div>
           <div className="time-pick-container">
             <span className="time-header">
@@ -109,16 +126,19 @@ const PatientBook = () => {
             <div className="book-input" style={{marginBottom: "10px"}}>
               <div className="slots" >
                 {timeSlot?.map((slot, index) => (
-                  <p key={index} onClick={handleTimeSelect} className={background ? "selected-slot": ""}> {slot.time} </p>
+                  <p key={index} className="selected-slot"> {slot.time} </p>
                 ))}
               </div>
                 <Stack spacing={5}>
                 <FormControl>
                 <FormLabel>Reason:</FormLabel>
-                <Select placeholder='Select option'>
-                    <option value='option1'>Option 1</option>
-                    <option value='option2'>Option 2</option>
-                    <option value='option3'>Option 3</option>
+                <Select placeholder='Select Reason' onChange={handleReasonChange} value={selectedReason}>
+                    <option value='Regular check-up'>Regular check-up</option>
+                    <option value='Follow-up visit'>Follow-up visit</option>
+                    <option value='Consultation'>Consultation</option>
+                    <option value="Specialist referral">Specialist referral</option>
+                    <option value="Nutritional advice">Nutritional advice</option>
+                    <option value="Disease prevention">Disease prevention</option>
                 </Select>
               </FormControl>
 

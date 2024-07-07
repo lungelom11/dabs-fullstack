@@ -66,3 +66,7 @@ class Admin(BaseModel):
     email: Optional[str] = None
     password: str
     role: str
+
+class AdminLogin(BaseModel):
+    username: str
+    password: str
