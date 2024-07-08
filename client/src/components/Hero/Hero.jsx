@@ -1,6 +1,7 @@
 import "./hero.css";
 import { Link } from "react-router-dom";
 import HeroImg from "../../images/doctor.png";
+import {Button} from "@chakra-ui/react"
 
 const Hero = () => {
   return (
@@ -15,8 +16,8 @@ const Hero = () => {
             repudiandae sint id nam excepturi. Tenetur facere dolores provident
             vero ut?
           </p>
-          <Link to="/patient/book" className="hero-btn">
-            Book Now
+          <Link to="/patient/book">
+            <Button colorScheme="blue" size="lg">Book Now</Button>
           </Link>
         </div>
         <div className="hero-img">

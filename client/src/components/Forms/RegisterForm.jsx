@@ -305,7 +305,6 @@ const RegisterForm = () => {
               loadingText="Submitting"
               colorScheme="blue"
               size="md"
-              bgColor={"blue"}
               height="48px"
               width="150px"
               type="submit"

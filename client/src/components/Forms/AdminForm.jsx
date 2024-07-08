@@ -13,6 +13,7 @@ import {
   import { useState } from "react";
   import { useNavigate } from "react-router-dom";
   import axios from "axios";
+  import { jwtDecode } from "jwt-decode";
   
   const LoginForm = ({ initialRef }) => {
     const URL = "http://127.0.0.1:8000/admin/login";
@@ -34,9 +35,18 @@ import {
           password,
         });
         const { access_token } = response.data;
-        localStorage.setItem("adminToken", access_token); // Store the token
-        // Redirect to protected route
-        navigate("/admin/home"); // Replace with your protected route
+        localStorage.setItem("adminToken", access_token);
+        const decoded = jwtDecode(access_token);
+        
+        //Redirect according to role
+        if (decoded.role == "doctor"){
+          navigate("/doctor/home");
+        } else if (decoded.role == "receptionist"){
+          navigate("/receptionist/home");
+        } else{
+          navigate("/admin/home");
+        }
+        
         toast({
           title: "Logged In Successfully",
           description: "Redirecting to the dashboard",

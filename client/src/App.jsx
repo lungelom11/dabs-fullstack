@@ -19,6 +19,14 @@ import ManageUsers from "./pages/admin/SuperAdmin/ManageUsers/ManageUsers";
 import SuperAdminInbox from "./pages/admin/SuperAdmin/SuperAdminInbox/SuperAdminInbox";
 import AdminProtectedRoutes from "./context/AdminProtectedRoutes"
 import AdminLogout from "./AdminLogout"
+import ReceptionistDashboard from "./layout/ReceptionistDashboard/ReceptionistDashboard"
+import ReceptionistHome from "./pages/admin/receptionist/ReceptionistHome/ReceptionistHome"
+import ReceptionistAppointments from "./pages/admin/receptionist/ReceptionistAppointments/ReceptionistAppointments"
+import ReceptionistInbox from "./pages/admin/receptionist/ReceptionistInbox/ReceptionistInbox"
+import DoctorDashboard from "./layout/DoctorDashboard/DoctorDashboard"
+import DoctorHome from "./pages/admin/doctor/DoctorHome/DoctorHome"
+import DoctorAppointments from "./pages/admin/doctor/DoctorAppointments/DoctorAppointments"
+import DoctorSchedule from "./pages/admin/doctor/DoctorSchedule/DoctorSchedule"
 
 
 const App = () => {
@@ -54,6 +62,20 @@ const App = () => {
               <Route path="/admin/users" element={<ManageUsers />} />
               <Route path="/admin/inbox" element={<SuperAdminInbox />} />
               <Route path="/admin/logout" element={<AdminLogout />} />
+            </Route>
+
+            <Route path="/receptionist" element={<ReceptionistDashboard />}>
+              <Route path="/receptionist/home" element={<ReceptionistHome />} />
+              <Route path="/receptionist/appointments" element={<ReceptionistAppointments />} />
+              <Route path="/receptionist/inbox" element={<ReceptionistInbox />} />
+              <Route path="/receptionist/logout" element={<AdminLogout />} />
+            </Route>
+
+            <Route path="/doctor" element={<DoctorDashboard />}>
+            <Route path="/doctor/home" element={<DoctorHome />} />
+              <Route path="/doctor/appointments" element={<DoctorAppointments />} />
+              <Route path="/doctor/schedule" element={<DoctorSchedule />} />
+              <Route path="/doctor/logout" element={<AdminLogout />} />
             </Route>
             
           </Routes>

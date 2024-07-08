@@ -1,6 +1,6 @@
 import "./navbar.css";
 import { Link } from "react-router-dom";
-import { Modal, ModalOverlay } from "@chakra-ui/react";
+import { Modal, ModalOverlay, Button } from "@chakra-ui/react";
 import ModalBody from "../ModalBody";
 import Logo from "../../images/logo.png";
 import { useDisclosure } from "@chakra-ui/react";
@@ -64,11 +64,11 @@ const Navbar = () => {
                   </div>
                 ) : (
                   <>
-                    <button className="login-btn" onClick={onOpen}>
+                    <Button colorScheme="blue" mr={4} variant="outline"  onClick={onOpen}>
                       Login
-                    </button>
+                    </Button>
                     <Link to="/register">
-                      <button className="register-btn">Register</button>
+                      <Button colorScheme="blue">Register</Button>
                     </Link>
                   </>
                 )}

@@ -7,7 +7,6 @@ const AdminProtectedRoutes = ({children}) => {
   const token = localStorage.getItem("adminToken");
   const toast = useToast();
   const toastIdRef = useRef(null);
-
   
   useEffect(() => {
     if (!token && !toastIdRef.current) {

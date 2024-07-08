@@ -62,7 +62,7 @@ const LoginForm = ({ initialRef }) => {
           <FormControl>
             <FormLabel>Email</FormLabel>
             <Input
-              focusBorderColor="#2713fc"
+              focusBorderColor="#2e76bd"
               ref={initialRef}
               placeholder="Email"
               value={email}
@@ -77,7 +77,7 @@ const LoginForm = ({ initialRef }) => {
                 pr="4.5rem"
                 type={show ? "text" : "password"}
                 placeholder="Enter password"
-                focusBorderColor="#2713fc"
+                focusBorderColor="#2e76bd"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -92,7 +92,6 @@ const LoginForm = ({ initialRef }) => {
         <ModalFooter>
           <Button
             type="submit"
-            bgColor={"blue"}
             size={"md"}
             color={"white"}
             isLoading={isLoading}
