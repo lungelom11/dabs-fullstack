@@ -1,0 +1,37 @@
+.manage-users-container{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    height: 500px;
+    margin-top: 1rem;
+    padding: 15px;
+}
+.table-container{
+    border: 1px solid gray;
+    border-radius: 15px;
+}
+THead{
+    border-bottom: 2px solid gray;
+}
+Td{
+    font-size: 1rem;
+    font-weight: 500;
+}
+Td .delete-icon{
+    margin-right: 1.5rem;
+    color: red;
+}
+
+Td .view-icon{
+    color: blue;
+}
+Td .delete-icon,Td .view-icon{
+    font-size: 1.2rem;
+    cursor: pointer
+}
+.top-elements{
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+}

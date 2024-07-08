@@ -42,9 +42,9 @@ const Navbar = () => {
                     </div>
                     <div className="pro_info">
                       <h4>
-                        Dr Malen
+                        System Administrator
                       </h4>
-                      <p>davidmalen@gmail.com</p>
+                      <p>admin@dabs.co.za</p>
                     </div>
                   </div>) : <button className="admin-btn" onClick={onOpen}>
                   Admin Login

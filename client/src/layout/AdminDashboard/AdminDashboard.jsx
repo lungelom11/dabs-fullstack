@@ -16,7 +16,7 @@ const Dashboard = () => {
     },
     {
       href: "/admin/users",
-      iconClass: "fa-regular fa-calendar-check",
+      iconClass: "fa-solid fa-users",
       text: "Manage Users",
     },
     {

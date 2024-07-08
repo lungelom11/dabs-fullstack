@@ -49,9 +49,9 @@ const PatientBook = () => {
   useEffect(()=>{
     const {patient_id} = jwtDecode(token);
     setPatientId(patient_id);
+    getTime();
   },[])
   
-
   const selectedDate = dayjs(appointment_date).format("DD MMM YYYY");
 
   const appointmentData = {
@@ -63,10 +63,6 @@ const PatientBook = () => {
     status: "Pending",
     notes
   };
-
-  useEffect(() => {
-    getTime();
-  }, []);
 
   const handleReasonChange = (event) => {
     setReason(event.target.value);

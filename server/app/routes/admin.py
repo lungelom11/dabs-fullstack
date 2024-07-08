@@ -1,7 +1,8 @@
-from fastapi import APIRouter, status, HTTPException
+from fastapi import APIRouter, status, HTTPException,Query
 from ..schemas import Admin
 from ..database import admin_collection
 from ..utils import generate_admin_id, hash
+from typing import Optional
 
 router = APIRouter(
     prefix= "/admin",
@@ -10,10 +11,13 @@ router = APIRouter(
 
 #Get all registered admins
 @router.get("/")
-def get_admins():
-    admin = list(admin_collection.find())
-
-    return admin
+def get_admins(role: Optional[str] = Query(None, description="Role to filter admins by")):
+    query = {}
+    if role:
+        query['role'] = role
+    
+    admins = list(admin_collection.find(query))
+    return admins
 
 #Returning single admin
 @router.get("/{id}")

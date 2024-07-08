@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field, EmailStr
-from typing import Optional
+from typing import Optional, List
 
 class Address(BaseModel):
     street: str
@@ -66,6 +66,7 @@ class Admin(BaseModel):
     email: Optional[str] = None
     password: str
     role: str
+    branches: List[str]
 
 class AdminLogin(BaseModel):
     username: str
