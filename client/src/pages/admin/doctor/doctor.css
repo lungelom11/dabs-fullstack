@@ -1,0 +1,37 @@
+.braches-stat{
+    width: 350px;
+    display: flex;
+    gap: 2rem;
+    margin: 2rem 0;
+    padding: 10px;
+}
+
+.braches-stat .branch-stat{
+    border: 1px solid gray;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+.braches-stat .branch-stat:hover{
+    background-color: darkgray;
+}
+
+.doctor-summary-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 10px;
+    gap: 2rem;
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.doctor-summary, .doctor-inbox{
+    border: 2px solid gray;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.chat-container{
+    background-color: white;
+    height: 200px;
+}

@@ -23,7 +23,6 @@ const DoctorDashboard = () => {
       href: "/doctor/schedule",
       iconClass: "fa-solid fa-calendar",
       text: "Schedule",
-      count: 11,
     },
     {
       href: "/doctor/logout",

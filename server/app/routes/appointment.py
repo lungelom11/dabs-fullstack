@@ -1,7 +1,8 @@
-from fastapi import APIRouter, status, HTTPException
+from fastapi import APIRouter, status, HTTPException,Query
 from ..schemas import Appointment, AppointmentUpdate
 from ..database import appointment_collection
 from ..utils import generate_appointment_id
+from typing import Optional
 
 router = APIRouter(
     prefix="/appointments",
@@ -10,8 +11,12 @@ router = APIRouter(
 
 # Get all appointments
 @router.get("/")
-def get_appointments():
-    appointments = list(appointment_collection.find())
+def get_appointments(status: Optional[str] = Query(None, description="Filtering appoinments by status")):
+    query = {}
+    if status:
+        query['status'] = status
+    
+    appointments = list(appointment_collection.find(query))
 
     return appointments
 
