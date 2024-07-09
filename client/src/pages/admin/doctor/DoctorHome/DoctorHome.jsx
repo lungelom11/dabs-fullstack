@@ -63,7 +63,7 @@ const DoctorHome = () => {
           <div className="chat-container"></div>
         </div>
       </div>
-      <Button colorScheme='yellow' style={{margin: "1rem 0"}}>Generate Report</Button>
+      <Button colorScheme='green' style={{margin: "1rem 0"}}>Generate Report</Button>
 
     </div>
   )
