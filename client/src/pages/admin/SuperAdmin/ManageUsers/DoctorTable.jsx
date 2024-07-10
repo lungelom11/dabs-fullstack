@@ -23,6 +23,7 @@ import {
     FormLabel,
     Select,
     useToast,
+    Img,
   } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import axios from "axios"
@@ -40,7 +41,8 @@ const DoctorTable = () => {
     const [branches, setBranches] = useState(['']);
     const url = "http://127.0.0.1:8000/admin";
     const toast = useToast();
-    const [doctors, setDoctors] = useState("")
+    const [doctors, setDoctors] = useState("");
+    const [image_url,setImageUrl] = useState("");
 
     const handleBranchNumberChange = (e) => {
         setBranchNumber(e.target.value)
@@ -62,11 +64,12 @@ const DoctorTable = () => {
             email,
             password,
             role: 'doctor',
-            branches
+            branches,
+            image_url
           };
       
+          console.log(data)
           try {
-
             const response = await axios.post(url, data, {
               headers: {
                 'Content-Type': 'application/json'
@@ -76,7 +79,7 @@ const DoctorTable = () => {
             if (response.status === 200 || response.status === 201) {
                 toast({
                     title: "Doctor Created Successfully",
-                    message: "Share username and password to doctor via email",
+                    description: "Share username and password to doctor via email",
                     status: "success",
                     duration: 5000,
                     isClosable: true,
@@ -92,6 +95,7 @@ const DoctorTable = () => {
             console.error('Error:', error);
             setIsLoading(false)
           }
+      
         };
 
         useEffect(() => {
@@ -102,7 +106,16 @@ const DoctorTable = () => {
           fetchDoctors()
       }, [])
   
-      
+      const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            setImageUrl(reader.result);
+          };
+          reader.readAsDataURL(file);
+        }
+      }
 
   return (
     <>
@@ -152,7 +165,7 @@ const DoctorTable = () => {
             </Table>
         </TableContainer>
         : <h4>Loading..</h4>}
-
+        
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
@@ -171,7 +184,13 @@ const DoctorTable = () => {
                         <Input placeholder="Username"  value={username} onChange={(e) => setUsername(e.target.value)} />
                         <Input type="email" placeholder="Email"  value={email} onChange={(e) => setEmail(e.target.value)} />
                    </div>
-
+                    <div className="upload-image-container">
+                      {/* upload doctors image upon registration */}
+                      <FormControl>
+                        <FormLabel>Upload Image:</FormLabel>
+                        <Input type="file" placeholder="Upload Doctor Image" style={{padding:"5px"}} onChange={handleFileChange} />
+                      </FormControl>
+                    </div>
                    <div>
                    <FormLabel>Number of braches?</FormLabel>
                    <Select placeholder="Select number of branches" onChange={handleBranchNumberChange}>

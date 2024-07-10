@@ -35,3 +35,6 @@ Td .delete-icon,Td .view-icon{
     justify-content: space-between;
     margin: 1rem 0;
 }
+.upload-image-container{
+    padding: 5px;
+}

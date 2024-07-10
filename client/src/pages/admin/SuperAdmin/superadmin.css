@@ -1,0 +1,7 @@
+.admin-home-container{
+    margin: 1rem 1rem;
+}
+
+.admin-home-container ul li {
+    list-style-type: circle;
+}

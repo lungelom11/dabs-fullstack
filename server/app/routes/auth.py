@@ -1,17 +1,16 @@
-from fastapi import status, APIRouter,HTTPException
-from ..schemas import  PatientLogin,AdminLogin
+from fastapi import status, APIRouter, HTTPException
+from ..schemas import PatientLogin, AdminLogin
 from ..database import patient_collection, admin_collection
 from ..utils import hash, verify
-from ..oath2 import create_access_token, create_admin_access_token
+from ..oauth2 import create_access_token, create_admin_access_token
 
 router = APIRouter(
     tags=["Authentication"]
 )
 
 @router.post('/login')
-def login(patient_credentials: PatientLogin):
-    patient = patient_collection.find_one({"email": patient_credentials.email})
-
+async def login(patient_credentials: PatientLogin):
+    patient = await patient_collection.find_one({"email": patient_credentials.email})
 
     if not patient:
         raise HTTPException(
@@ -26,10 +25,9 @@ def login(patient_credentials: PatientLogin):
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-
 @router.post('/admin/login')
-def login(admin_credentials: AdminLogin):
-    admin = admin_collection.find_one({"username": admin_credentials.username})
+async def login(admin_credentials: AdminLogin):
+    admin = await admin_collection.find_one({"username": admin_credentials.username})
 
     if not admin:
         raise HTTPException(
@@ -42,5 +40,3 @@ def login(admin_credentials: AdminLogin):
     admin_access_token = create_admin_access_token(data={"admin_id": admin["_id"], "role": admin["role"]})
 
     return {"access_token": admin_access_token, "token_type": "bearer"}
-
-

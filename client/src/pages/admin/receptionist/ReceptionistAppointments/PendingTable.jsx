@@ -19,10 +19,7 @@ import {
 import { useEffect, useState } from 'react'
 import axios from "axios"
 
-
-
 const PendingTable = () => {
-
     const url = "http://127.0.0.1:8000/appointments";
     const toast = useToast();
     const [pendingAppoingments, setPendingAppoingments] = useState("")
@@ -35,7 +32,22 @@ const PendingTable = () => {
         }
         fetchPendingAppointments()
       }, [])
-  
+      
+      const deleteAppointment = async (id) => {
+        
+        try {
+            const response = await axios.delete(url + `/${id}`);
+            toast({
+                title: "Appointment Deleted Successfully",
+                // description: "Redirecting to the dashboard",
+                status: "success",
+                duration: 5000,
+                isClosable: true,
+              });
+        } catch (error) {
+            console.log("An erro occured", error)
+        }
+      }
       
 
   return (
@@ -70,7 +82,7 @@ const PendingTable = () => {
                     <Td>{appointment.appointment_date} , {appointment.appointment_time}</Td>
                     <Td >Brach</Td>
                     <Td>
-                        <span className="delete-icon" title='Delete Patient'>
+                        <span className="delete-icon" title='Delete Patient' onClick={() => deleteAppointment(appointment._id)}>
                             <i className="fa-solid fa-trash-can"></i>
                         </span>
                         <span className="view-icon" title='View Patient'>

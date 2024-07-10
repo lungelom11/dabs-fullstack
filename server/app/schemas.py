@@ -67,6 +67,7 @@ class Admin(BaseModel):
     password: str
     role: str
     branches: List[str]
+    image_url: Optional[str] = None  # Field to store the admin's image URL
 
 class AdminLogin(BaseModel):
     username: str

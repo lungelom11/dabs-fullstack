@@ -63,7 +63,7 @@ const ReceptionistTable = () => {
             if (response.status === 200 || response.status === 201) {
                 toast({
                     title: "Receptionist Created Successfully",
-                    message: "Share username and password to doctor via email",
+                    description: "Share username and password to doctor via email",
                     status: "success",
                     duration: 5000,
                     isClosable: true,

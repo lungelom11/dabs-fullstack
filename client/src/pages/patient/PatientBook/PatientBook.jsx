@@ -1,8 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Button,
   FormControl,
   FormLabel,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
   Popover,
   PopoverArrow,
   PopoverBody,
@@ -21,6 +28,10 @@ import {
   Thead,
   Tr,
   useToast,
+  useDisclosure,
+  InputGroup,
+  InputLeftElement,
+  Input,
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { InfoIcon } from "@chakra-ui/icons";
@@ -30,6 +41,7 @@ import dayjs from "dayjs";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import useAppointmentData from "../../../hooks/useAppointmentData"
+import doctorImg from "../../../images/refilwe.jpg"
 
 const PatientBook = () => {
   const url = "http://127.0.0.1:8000/appointments";
@@ -45,13 +57,29 @@ const PatientBook = () => {
   const [patientId, setPatientId] = useState(null);
   const token = localStorage.getItem("patientToken");
   const {bookedAppointment} = useAppointmentData()
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const initialRef = useRef(null);
+  const finalRef = useRef(null);
+  const [doctors, setDoctors] = useState()
   
   useEffect(()=>{
     const {patient_id} = jwtDecode(token);
     setPatientId(patient_id);
     getTime();
+
+    const fetchDoctors = async () =>{
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/admin/?role=doctor")
+        setDoctors(response.data);
+
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    fetchDoctors()
   },[])
-  
+
   const selectedDate = dayjs(appointment_date).format("DD MMM YYYY");
 
   const appointmentData = {
@@ -211,6 +239,11 @@ const PatientBook = () => {
                 <FormLabel>Note: </FormLabel>
                 <Textarea placeholder="Enter note (Optional)" value={notes} onChange={(e) => setNotes(e.target.value)} />
               </FormControl>
+
+              <FormControl>
+                <FormLabel> <span style={{marginRight: "5px"}}><i className="fa-solid fa-hospital"></i></span>Select Branch:</FormLabel>
+                <Button colorScheme="yellow" onClick={onOpen}>Choose</Button>
+              </FormControl>
             </Stack>
           </div>
           <div className="book-btn">
@@ -249,6 +282,57 @@ const PatientBook = () => {
           </TableContainer> : <p>No Appointment</p>}
         </div>
       </div>
+      <Modal isOpen={isOpen} onClose={onClose}
+      initialFocusRef={initialRef}
+      finalFocusRef={finalRef}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Select Branch</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <div className="select-branch-container">
+            <InputGroup>
+              <InputLeftElement pointerEvents='none'>
+                <i className="fa-solid fa-magnifying-glass"></i>
+              </InputLeftElement>
+              <Input type='text' placeholder='Search Doctor' ref={initialRef} />
+            </InputGroup>
+          
+                { doctors ? doctors.map((doctor) => (
+                   <div key={doctor._id} className="doctor-result"> 
+                   <div className="card">
+                      <div className="doctor-name">
+                         <h4>{doctor.firstname} {doctor.lastname}</h4>
+                      </div>
+                     <div className="profile-img">
+                       <img src={doctor.image_url} alt="No Image" />
+                     </div>
+                       
+                   </div>
+    
+                   <div className="list-of-branches">
+                     <p>Select branch</p>
+ 
+                     <ul className="list">
+                       {doctor.branches.map((branch) => (
+                        <li key={branch}>{branch}</li>
+                       ))}
+                      
+                     </ul>
+                   </div> 
+                  </div>
+                )) : <p>Loading...</p>}    
+          
+            </div>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme='green' mr={3} onClick={onClose}>
+              Done
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </section>
   );
 };
