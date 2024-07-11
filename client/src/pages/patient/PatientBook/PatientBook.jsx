@@ -32,6 +32,7 @@ import {
   InputGroup,
   InputLeftElement,
   Input,
+  Spinner,
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { InfoIcon } from "@chakra-ui/icons";
@@ -40,15 +41,14 @@ import BookCalendar from "../../../components/Calendar/BookCalendar";
 import dayjs from "dayjs";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import useAppointmentData from "../../../hooks/useAppointmentData"
-import doctorImg from "../../../images/refilwe.jpg"
+import useAppointmentData from "../../../hooks/useAppointmentData";
+import DoctorSearch from "./DoctorSearch";
 
 const PatientBook = () => {
   const url = "http://127.0.0.1:8000/appointments";
   const [timeSlot, setTimeSlot] = useState([]);
   const [appointment_date, setAppointmentDate] = useState(dayjs("11 July 2024"));
   const [appointment_time, setAppointmentTime] = useState(null);
-  const [selectedReason, setSelectedReason] = useState('');
   const [reason, setReason] = useState('');
   const [notes, setNotes] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -60,7 +60,10 @@ const PatientBook = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = useRef(null);
   const finalRef = useRef(null);
-  const [doctors, setDoctors] = useState()
+  const [doctors, setDoctors] = useState([])
+  const [searchDoctor, setSearchDoctor] = useState("")
+  const [doc_id, setDoctorId]  = useState("")
+  const [branch, setBranch] = useState()
   
   useEffect(()=>{
     const {patient_id} = jwtDecode(token);
@@ -84,11 +87,12 @@ const PatientBook = () => {
 
   const appointmentData = {
     patient_id: patientId,
-    doc_id: "D2311",
+    doc_id,
     appointment_date: selectedDate,
     appointment_time,
     reason,
     status: "Pending",
+    branch,
     notes
   };
 
@@ -100,6 +104,9 @@ const PatientBook = () => {
     setAppointmentTime(slot);
   };
 
+  const handleSearch = (e) => {
+    setSearchDoctor(e.target.value)
+  }
   const getTime = () => {
     const timeList = [];
     for (let i = 8; i <= 12; i++) {
@@ -132,8 +139,8 @@ const PatientBook = () => {
       });
       return;
     }
-
     setIsLoading(true);
+    console.log(appointmentData)
 
     try {
       const response = await axios.post(url, appointmentData);
@@ -168,6 +175,11 @@ const PatientBook = () => {
       setIsLoading(false);
     }
   };
+
+  const filteredDoctors = doctors ? doctors.filter(doctor => 
+    doctor.firstname.toLowerCase().includes(searchDoctor.toLowerCase()) || 
+    doctor.lastname.toLowerCase().includes(searchDoctor.toLowerCase())
+  ) : [];
 
   return (
     <section className="patient-book-container">
@@ -295,34 +307,18 @@ const PatientBook = () => {
               <InputLeftElement pointerEvents='none'>
                 <i className="fa-solid fa-magnifying-glass"></i>
               </InputLeftElement>
-              <Input type='text' placeholder='Search Doctor' ref={initialRef} />
-            </InputGroup>
-          
-                { doctors ? doctors.map((doctor) => (
-                   <div key={doctor._id} className="doctor-result"> 
-                   <div className="card">
-                      <div className="doctor-name">
-                         <h4>{doctor.firstname} {doctor.lastname}</h4>
-                      </div>
-                     <div className="profile-img">
-                       <img src={doctor.image_url} alt="No Image" />
-                     </div>
-                       
-                   </div>
-    
-                   <div className="list-of-branches">
-                     <p>Select branch</p>
- 
-                     <ul className="list">
-                       {doctor.branches.map((branch) => (
-                        <li key={branch}>{branch}</li>
-                       ))}
-                      
-                     </ul>
-                   </div> 
-                  </div>
-                )) : <p>Loading...</p>}    
-          
+              <Input type='text' placeholder='Search Doctor' ref={initialRef} value={searchDoctor} onChange={handleSearch}/>
+            </InputGroup>     
+            {doctors ? (
+              filteredDoctors.length > 0 ? (
+                <DoctorSearch doctors={filteredDoctors} setDoctorId={setDoctorId} setBranch={setBranch} selectedBranch= {branch}/>
+              ) : (
+                <p>Doctor not found</p>
+              )
+            ) : (
+              <Spinner />
+            )}
+              
             </div>
           </ModalBody>
 

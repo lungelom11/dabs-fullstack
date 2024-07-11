@@ -17,11 +17,10 @@ const usePatientData = () => {
 
       const token = localStorage.getItem("patientToken");
       if (token) {
-        const decoded = jwtDecode(token);
-        const id = decoded.id;
-        setPatientId(id); // Set patientId state
+        const {patient_id} = jwtDecode(token);
+        setPatientId(patient_id); // Set patientId state
 
-        const url = `http://127.0.0.1:8000/patients/${id}`;
+        const url = `http://127.0.0.1:8000/patients/${patient_id}`;
         try {
           const response = await axios.get(url, {
             headers: {

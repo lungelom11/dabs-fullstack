@@ -45,11 +45,12 @@ class UpdatePatient(BaseModel):
 
 class Appointment(BaseModel):
     patient_id: str
-    doc_id: str
+    doc_id: int
     appointment_date: str
     appointment_time: str
     reason: str
     status: str
+    branch: str
     notes: Optional[str] = None
 
 class AppointmentUpdate(BaseModel):

@@ -22,7 +22,7 @@ async def get_appointments(status: Optional[str] = Query(None, description="Filt
 # Get one appointment
 @router.get("/{id}", response_model=dict)
 async def get_appointment(id: str):
-    appointment = await appointment_collection.find_one({"_id": id})
+    appointment = await appointment_collection.find_one({"patient_id": id})
     if appointment:
         return appointment
     else:
@@ -59,7 +59,7 @@ async def update_appointment(id: str, updated_appointment: AppointmentUpdate):
 
 # Delete/Cancel appointment
 @router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_appointment(id: str):
+async def delete_appointment(id: int):
     result = await appointment_collection.delete_one({"_id": id})
 
     if result.deleted_count == 0:

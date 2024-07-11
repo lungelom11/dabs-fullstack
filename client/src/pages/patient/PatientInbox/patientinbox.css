@@ -1,0 +1,8 @@
+.inbox-container{
+    margin: 1rem 0;
+}
+
+.updates-container ul li{
+    list-style-type: circle;
+    margin: 1rem 0;
+}

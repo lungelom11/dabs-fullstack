@@ -18,7 +18,7 @@ async def get_patients():
 
 # Get Single patient
 @router.get("/{id}", response_model=dict)
-async def get_patient(id: str, current_patient: dict = Depends(get_current_user)):
+async def get_patient(id: str):
     patient = await patient_collection.find_one({"_id": id})
     
     if patient:
