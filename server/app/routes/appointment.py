@@ -11,10 +11,15 @@ router = APIRouter(
 
 # Get all appointments
 @router.get("/", response_model=list)
-async def get_appointments(status: Optional[str] = Query(None, description="Filtering appointments by status")):
+async def get_appointments(
+    status: Optional[str] = Query(None, description="Filter appointments by status"),
+    appointment_date: Optional[str] = Query(None, description="Filter appointments by date in 'dd MMM yyyy' format")
+):
     query = {}
     if status:
         query['status'] = status
+    if appointment_date:
+        query['appointment_date'] = appointment_date
     
     appointments = await appointment_collection.find(query).to_list(None)
     return appointments
@@ -48,7 +53,7 @@ async def create_appointment(new_appointment: Appointment):
 
 # Update appointment
 @router.put("/{id}", response_model=dict)
-async def update_appointment(id: str, updated_appointment: AppointmentUpdate):
+async def update_appointment(id: int, updated_appointment: AppointmentUpdate):
     result = await appointment_collection.update_one(
         {"_id": id}, {"$set": updated_appointment.dict()}
     )

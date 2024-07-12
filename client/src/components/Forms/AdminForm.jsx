@@ -72,7 +72,7 @@ import {
             <FormControl>
               <FormLabel>Username</FormLabel>
               <Input
-                focusBorderColor="#2713fc"
+                focusBorderColor="#2e76bd"
                 ref={initialRef}
                 placeholder="Username"
                 value={username}
@@ -87,7 +87,7 @@ import {
                   pr="4.5rem"
                   type={show ? "text" : "password"}
                   placeholder="Enter password"
-                  focusBorderColor="#2713fc"
+                  focusBorderColor="#2e76bd"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />

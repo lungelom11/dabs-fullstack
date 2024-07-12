@@ -1,0 +1,33 @@
+.patient-home-container{
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+}
+
+.notifications-container{
+    margin: 1rem;
+    height: 400px;
+}
+
+.upcoming-appointment{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid gray;
+    padding: 7px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 1rem 0;
+}
+
+.upcoming-appointment:hover{
+    background-color:darkgray;
+    color: white;
+}
+
+.inbox-summary{
+    border: 2px solid gray;
+    padding: 7px;
+    border-radius: 10px;
+}

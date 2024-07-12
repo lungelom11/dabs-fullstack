@@ -13,6 +13,9 @@ const PatientView = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {bookedAppointment} = useAppointmentData()
 
+const handleCancel = (e) => {
+  console.log("Clicked!!!!")
+}
 
   return (
     <>
@@ -33,6 +36,9 @@ const PatientView = () => {
               {bookedAppointment.appointment_time}
             </p>
             <p>
+              <span className="data">Branch:</span>{bookedAppointment.branch}
+            </p>
+            <p>
               <span className="data">Reason:</span>
               {bookedAppointment.reason}
             </p>
@@ -49,7 +55,7 @@ const PatientView = () => {
               <Button colorScheme="green" variant="outline" onClick={onOpen}>
                 Edit Appointment
               </Button>
-              <Button colorScheme="red" variant="outline">
+              <Button colorScheme="red" variant="outline" onClick={handleCancel}>
                 Cancel Appointment
               </Button>
             </Stack>

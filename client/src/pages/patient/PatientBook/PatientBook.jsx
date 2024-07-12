@@ -47,7 +47,7 @@ import DoctorSearch from "./DoctorSearch";
 const PatientBook = () => {
   const url = "http://127.0.0.1:8000/appointments";
   const [timeSlot, setTimeSlot] = useState([]);
-  const [appointment_date, setAppointmentDate] = useState(dayjs("11 July 2024"));
+  const [appointment_date, setAppointmentDate] = useState(null);
   const [appointment_time, setAppointmentTime] = useState(null);
   const [reason, setReason] = useState('');
   const [notes, setNotes] = useState('');
@@ -56,20 +56,20 @@ const PatientBook = () => {
   const navigate = useNavigate();
   const [patientId, setPatientId] = useState(null);
   const token = localStorage.getItem("patientToken");
-  const {bookedAppointment} = useAppointmentData()
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const {bookedAppointment} = useAppointmentData();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const selectedDate = dayjs(appointment_date).format("DD MMM YYYY");
   const initialRef = useRef(null);
   const finalRef = useRef(null);
-  const [doctors, setDoctors] = useState([])
-  const [searchDoctor, setSearchDoctor] = useState("")
-  const [doc_id, setDoctorId]  = useState("")
-  const [branch, setBranch] = useState()
+  const [doctors, setDoctors] = useState([]);
+  const [searchDoctor, setSearchDoctor] = useState("");
+  const [doc_id, setDoctorId]  = useState("");
+  const [branch, setBranch] = useState();
+  const [bookedSlots, setBookedSlots] = useState([""]);
   
   useEffect(()=>{
     const {patient_id} = jwtDecode(token);
     setPatientId(patient_id);
-    getTime();
-
     const fetchDoctors = async () =>{
       try {
         const response = await axios.get("http://127.0.0.1:8000/admin/?role=doctor")
@@ -79,11 +79,25 @@ const PatientBook = () => {
         console.log(error)
       }
     }
-
     fetchDoctors()
   },[])
 
-  const selectedDate = dayjs(appointment_date).format("DD MMM YYYY");
+  //Handling available and not available slots
+  useEffect(() =>{
+    const fetchBookedSlots = async () => {
+      try {
+        const response = await axios.get(`http://127.0.0.1:8000/appointments/?appointment_date=${selectedDate}`);
+        setBookedSlots(response.data)
+        
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    
+    //fetch timeslots of this specific dat
+    fetchBookedSlots()
+    getTime();
+  }, [selectedDate])
 
   const appointmentData = {
     patient_id: patientId,
@@ -224,15 +238,22 @@ const PatientBook = () => {
           <div className="book-input" style={{ marginBottom: "10px" }}>
             <div className="slots">
               {timeSlot?.map((slot, index) => (
-                <p
-                  key={index}
-                  onClick={() => handleSlotSelect(slot.time)}
-                  style={{
-                    backgroundColor: appointment_time === slot.time ? 'green' : ''
-                  }}
-                >
-                  {slot.time}
-                </p>
+                <button
+                key={index}
+                onClick={() => handleSlotSelect(slot.time)}
+                style={{
+                  backgroundColor: bookedSlots.some((booked) => booked.appointment_time === slot.time)
+                    ? '' 
+                    : appointment_time === slot.time
+                    ? 'green'
+                    : ''
+                }}
+                className={bookedSlots.some((booked) => booked.appointment_time === slot.time) ? "booked" : ""}
+                title={bookedSlots.some((booked) => booked.appointment_time === slot.time) ? "Slot already booked" : ""}
+              >
+                {slot.time}
+              </button>
+              
               ))}
             </div>
             <Stack spacing={5}>

@@ -16,7 +16,7 @@ const Navbar = () => {
     <>
       <div className="nav-container">
         <nav>
-          <Link to="/admin">
+          <Link to="/admin-area">
             <div className="logo">
               <span>
                 <img src={Logo} />
@@ -28,7 +28,7 @@ const Navbar = () => {
           <div className="menu">
             <ul className="menu-items">
               <li>
-                <Link className="menu-link" to="/">
+                <Link className="menu-link" to="/admin-area">
                   Home
                 </Link>
               </li>

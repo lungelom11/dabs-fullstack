@@ -1,9 +1,9 @@
 .view-appointment-container {
-  margin-top: 2rem;
   width: 400px;
   border-radius: 20px;
   box-shadow: 2px 3px 2px 2px lightgrey;
   padding: 15px;
+  margin: 2rem auto;
 }
 
 .appointment-data-container {

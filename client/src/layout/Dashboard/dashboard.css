@@ -11,13 +11,13 @@
   flex-grow: 1; /* Main content takes the remaining space */
   transition: margin-left 0.3s;
   margin-left: 310px;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; */
 }
 
 .main-content-active {
   flex-grow: 1; /* Main content takes the remaining space */
   transition: margin-left 0.3s;
-  margin-left: 100px;
+  margin-left: 130px;
 }

@@ -46,7 +46,7 @@
   grid-template-columns: 1fr 1fr;
 }
 
-.slots p {
+.slots button {
   padding: 5px;
   border: 1px solid gray;
   margin: 5px;
@@ -57,8 +57,19 @@
   cursor: pointer;
 }
 
-.slots p:hover {
+.slots button:hover {
   background-color: green;
+}
+
+.slots .booked{
+  background-color: lightgray;
+  color: white;
+  cursor: not-allowed;
+}
+
+.slots .booked:hover{
+  background-color: lightgrey;
+  color: white;
 }
 
 .book-btn {
