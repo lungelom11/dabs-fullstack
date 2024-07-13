@@ -32,3 +32,12 @@
 .stat .change{
     font-size: 1.3rem;
 }
+
+.appointment-actions{
+    padding: 10px;
+    margin: .2rem auto;
+    border-radius: 10px;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}

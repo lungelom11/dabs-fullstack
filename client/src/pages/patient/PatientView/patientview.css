@@ -11,7 +11,6 @@
 }
 
 .appointment-data-container .header {
-  background-color: gold;
   padding-left: 10px;
 }
 .appointment-data {
@@ -26,15 +25,15 @@
   font-weight: 700;
   margin-right: 5px;
 }
-.appointment-data .pending{
+.pending{
   background-color: gold;
 }
 
-.appointment-data .cancelled{
+.cancelled{
   background-color: red;
 }
 
-.appointment-data .schedulled{
+.scheduled{
   background-color: green;
 }
 

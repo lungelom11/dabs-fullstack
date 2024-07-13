@@ -29,7 +29,7 @@ const ActiveTable = () => {
 
     useEffect(() => {
         const fetchActiveAppointments = async () =>{
-        const response = await axios.get(url + `/?status=Active`)
+        const response = await axios.get(url + `/?status=Scheduled`)
         setActiveAppointments(response.data)
         }
         fetchActiveAppointments()

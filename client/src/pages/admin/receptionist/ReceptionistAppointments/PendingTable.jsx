@@ -11,19 +11,21 @@ import {
     InputGroup,
     InputLeftElement,
     Input,
-    useToast,
-    Spinner,
-    Container,
+    Button,
+    Modal,
+    ModalOverlay,
+    useDisclosure,
   } from '@chakra-ui/react'
 
 import { useEffect, useState } from 'react'
 import axios from "axios"
+import AppointmentModal from "./AppointmentModal"
 
-const PendingTable = () => {
-    const url = "http://127.0.0.1:8000/appointments";
-    const toast = useToast();
+const PendingTable = ({deleteAppointment}) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
     const [pendingAppoingments, setPendingAppoingments] = useState("")
-
+    const url = "http://127.0.0.1:8000/appointments";
+    const [selectedAppointment,setSelectedAppointment] = useState("")
 
     useEffect(() => {
         const fetchPendingAppointments = async () =>{
@@ -33,22 +35,10 @@ const PendingTable = () => {
         fetchPendingAppointments()
       }, [])
       
-      const deleteAppointment = async (id) => {
-        
-        try {
-            const response = await axios.delete(url + `/${id}`);
-            toast({
-                title: "Appointment Deleted Successfully",
-                // description: "Redirecting to the dashboard",
-                status: "success",
-                duration: 5000,
-                isClosable: true,
-              });
-        } catch (error) {
-            console.log("An erro occured", error)
-        }
-      }
-      
+      const handleEditClick = (appointment) => {
+        setSelectedAppointment(appointment);
+        onOpen();
+      };
 
   return (
     <>
@@ -80,27 +70,40 @@ const PendingTable = () => {
                         <Td>{appointment._id}</Td>
                     <Td>{appointment.patient_id}</Td>
                     <Td>{appointment.appointment_date} , {appointment.appointment_time}</Td>
-                    <Td >Brach</Td>
+                    <Td >{appointment.branch}</Td>
                     <Td>
-                        <span className="delete-icon" title='Delete Patient' onClick={() => deleteAppointment(appointment._id)}>
+                        <span className="delete-icon" title='Delete Patient' onClick={() => {
+                          if (confirm("Are you sure you want to delete?")) {
+                            deleteAppointment(appointment._id)
+                          }
+                        }} >
                             <i className="fa-solid fa-trash-can"></i>
                         </span>
-                        <span className="view-icon" title='View Patient'>
-                        <i className="fa-solid fa-eye"></i>
-                        </span>
+                        <Button colorScheme="green" onClick={()=> handleEditClick(appointment)}>Edit</Button>
                     </Td>
+                    
                 </Tr>
                   ))
                 }
                 </Tbody>
             </Table>
         </TableContainer>
+
+
         : <div className='spinner-container'>
               <h3>No pending appointments</h3>
           </div>
         }
+
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay />
+        <AppointmentModal selectedAppointment={selectedAppointment} />
+    </Modal>            
+       
     </>
   )
 }
 
 export default PendingTable
+
+

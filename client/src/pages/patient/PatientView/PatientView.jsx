@@ -64,7 +64,7 @@ const handleCancel = async (e) => {
     <>
       <div className="view-appointment-container">
         {bookedAppointment ? <div className="appointment-data-container">
-        <div className="header">
+        <div className={bookedAppointment.status == "Pending" ? "header pending": bookedAppointment.status == "Cancelled"? " header cancelled": "header scheduled" }>
             <h2>{bookedAppointment.patient_id}</h2>
           </div>
           <div className="appointment-data">
@@ -87,7 +87,7 @@ const handleCancel = async (e) => {
             </p>
             <p>
               <span className="data">Status:</span>
-              <span className={bookedAppointment.status == "Pending" ? "pending": bookedAppointment.status == "Cancelled"? "cancelled": "schedulled" }>{bookedAppointment.status}</span>
+              <span className={bookedAppointment.status == "Pending" ? "pending": bookedAppointment.status == "Cancelled"? "cancelled": "scheduled" }>{bookedAppointment.status}</span>
             </p>
             <p>
               <span className="data">Notes:</span>{bookedAppointment.notes}
