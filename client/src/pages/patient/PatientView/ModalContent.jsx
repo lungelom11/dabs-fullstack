@@ -63,7 +63,7 @@ const ModalInformation = ({ onClose }) => {
         isClosable: true,
       });
       setIsLoading(false);
-      navigate("/patient/view");
+      window.location.href = "/patient/view"
     } catch (error) {
       toast({
         title: "Failed to Update",

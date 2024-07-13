@@ -58,6 +58,7 @@ class AppointmentUpdate(BaseModel):
     appointment_time: str
     branch: str
     reason: str
+    status: str
     notes: Optional[str] = None
 
 class Admin(BaseModel):

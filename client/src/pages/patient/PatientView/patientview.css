@@ -26,10 +26,31 @@
   font-weight: 700;
   margin-right: 5px;
 }
-.appointment-data .status{
+.appointment-data .pending{
   background-color: gold;
 }
 
+.appointment-data .cancelled{
+  background-color: red;
+}
+
+.appointment-data .schedulled{
+  background-color: green;
+}
+
+
 .buttons {
   margin-top: 1rem;
+}
+
+.not-found{
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.not-found p{
+  text-decoration: underline;
 }

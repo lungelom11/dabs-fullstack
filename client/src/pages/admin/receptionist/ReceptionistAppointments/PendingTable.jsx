@@ -61,7 +61,7 @@ const PendingTable = () => {
             </InputGroup>
          </div>
          
-         { pendingAppoingments ?  
+         { pendingAppoingments.length >= 1 ?  
          <TableContainer>
        
             <Table variant='simple'>
@@ -96,8 +96,8 @@ const PendingTable = () => {
             </Table>
         </TableContainer>
         : <div className='spinner-container'>
-            <Spinner size='xl' />
-        </div>
+              <h3>No pending appointments</h3>
+          </div>
         }
     </>
   )
