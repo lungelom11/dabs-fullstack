@@ -102,7 +102,6 @@ import {
           <ModalFooter>
             <Button
               type="submit"
-              bgColor={"blue"}
               size={"md"}
               color={"white"}
               isLoading={isLoading}

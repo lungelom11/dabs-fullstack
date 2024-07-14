@@ -20,13 +20,23 @@ async def get_admins(role: Optional[str] = Query(None, description="Role to filt
     return admins
 
 # Get single admin
-@router.get("/{id}", response_model=dict)
-async def get_admin(id: str):
-    admin = await admin_collection.find_one({"_id": id})
+# @router.get("/{id}", response_model=dict)
+# async def get_admin(id: int):
+#     admin = await admin_collection.find_one({"_id": id})
+#     if admin:
+#         return admin
+#     else:
+#         raise HTTPException(status_code=404, detail=f"Admin with id {id} not found")
+# Get single admin by id and role
+@router.get("/{id}/{role}", response_model=dict)
+async def get_admin_by_id_and_role(id: int, role: str):
+    admin = await admin_collection.find_one({"_id": id, "role": role})
     if admin:
         return admin
     else:
-        raise HTTPException(status_code=404, detail=f"Admin with id {id} not found")
+        raise HTTPException(status_code=404, detail=f"Admin with id {id} and role {role} not found")
+
+
 
 # Create new Admin
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=dict)

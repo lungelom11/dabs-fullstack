@@ -9,8 +9,11 @@ import {
 } from '@chakra-ui/react'
 import "../../receptionist/receptionist.css"
 import "../doctor.css"
+import useAdminData from '../../../../hooks/useAdminData'
 
 const DoctorHome = () => {
+  const {doctorData} = useAdminData()
+
   return (
     <div>
       <StatGroup>
@@ -63,8 +66,7 @@ const DoctorHome = () => {
           <div className="chat-container"></div>
         </div>
       </div>
-      <Button colorScheme='green' style={{margin: "1rem 0"}}>Generate Report</Button>
-
+      <Button colorScheme='green' style={{margin: "1rem 2rem"}}>Generate Report</Button>
     </div>
   )
 }

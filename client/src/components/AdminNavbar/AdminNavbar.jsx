@@ -1,16 +1,16 @@
 import "../Navbar/navbar.css";
 import { Link } from "react-router-dom";
-import { Modal, ModalOverlay, useDisclosure ,Button} from "@chakra-ui/react";
-// import { Modal, ModalOverlay } from "@chakra-ui/react";
+import { Modal, ModalOverlay, useDisclosure, Button } from "@chakra-ui/react";
 import ModalBody from "../AdminModal";
 import Logo from "../../images/logo.png";
 import { useRef } from "react";
+import useAdminData from "../../hooks/useAdminData";
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = useRef(null);
   const finalRef = useRef(null);
-  const token = localStorage.getItem("adminToken")
+  const { adminData, loading, error } = useAdminData();
 
   return (
     <>
@@ -19,7 +19,7 @@ const Navbar = () => {
           <Link to="/admin-area">
             <div className="logo">
               <span>
-                <img src={Logo} />
+                <img src={Logo} alt="Logo" />
               </span>
               <h3>DABS Web App</h3>
             </div>
@@ -33,23 +33,30 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                {token ? (<div className="profile">
+                {loading ? (
+                  <p>Loading...</p>
+                ) : error ? (
+                  <p>{error}</p>
+                ) : adminData ? (
+                  <div className="profile">
                     <div className="pro_img">
                       <img
-                        src="https://i.imgur.com/rgiY5VZ.png"
+                        src={adminData.image_url ? adminData.image_url : "https://i.imgur.com/rgiY5VZ.png"}
                         alt="profile_picture"
                       />
                     </div>
                     <div className="pro_info">
                       <h4>
-                        System Administrator
+                        {adminData.firstname} {adminData.lastname}
                       </h4>
-                      <p>admin@dabs.co.za</p>
+                      <p>{adminData.email}</p>
                     </div>
-                  </div>) : <Button colorScheme="blue" onClick={onOpen}>
-                  Admin Login
-                </Button> }
-              
+                  </div>
+                ) : (
+                  <Button colorScheme="blue" onClick={onOpen}>
+                    Admin Login
+                  </Button>
+                )}
               </li>
               <Modal
                 initialFocusRef={initialRef}

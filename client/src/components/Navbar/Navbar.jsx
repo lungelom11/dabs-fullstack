@@ -1,9 +1,16 @@
 import "./navbar.css";
 import { Link } from "react-router-dom";
-import { Modal, ModalOverlay, Button } from "@chakra-ui/react";
+import { Modal, ModalOverlay, Button, Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,useDisclosure } from "@chakra-ui/react";
+import {ChevronDownIcon} from "@chakra-ui/icons"
 import ModalBody from "../ModalBody";
 import Logo from "../../images/logo.png";
-import { useDisclosure } from "@chakra-ui/react";
 import { useRef } from "react";
 import usePatientData from "../../hooks/usePatientData";
 
@@ -33,12 +40,7 @@ const Navbar = () => {
                 <Link className="menu-link" to="/">
                   Home
                 </Link>
-              </li>
-              <li>
-                <Link className="menu-link" to="/about">
-                  About
-                </Link>
-              </li>
+              </li> 
               <li>
                 <Link className="menu-link" to="/contact">
                   Contact
@@ -63,14 +65,26 @@ const Navbar = () => {
                     </div>
                   </div>
                 ) : (
-                  <>
+                  <div style={{display:"flex", gap:"10px"}}>
+                    <li>
+              <Menu>
+                <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                  Admin Area
+                </MenuButton>
+                <MenuList>
+                  <Link to="/doctor/home"><MenuItem>Doctor</MenuItem></Link>
+                  <Link to="/receptionist/home"><MenuItem>Receptionist</MenuItem></Link>
+                  <Link to="/admin/home"><MenuItem>Administrator</MenuItem></Link>
+                </MenuList>
+              </Menu>
+                   </li>
                     <Button colorScheme="blue" mr={4} variant="outline"  onClick={onOpen}>
                       Login
                     </Button>
                     <Link to="/register">
                       <Button colorScheme="blue">Register</Button>
                     </Link>
-                  </>
+                  </div>
                 )}
               </li>
               <Modal

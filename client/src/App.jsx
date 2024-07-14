@@ -53,31 +53,31 @@ const App = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/admin-area" element={<AdminHome/>}/>
+            
             <Route 
               path="/admin" 
               element= {<AdminProtectedRoutes>
-              <AdminDashboard />
-              </AdminProtectedRoutes>}>
+              <AdminDashboard /></AdminProtectedRoutes>}>
               <Route path="/admin/home" element={<SuperAdminHome />} />
               <Route path="/admin/users" element={<ManageUsers />} />
               <Route path="/admin/inbox" element={<SuperAdminInbox />} />
               <Route path="/admin/logout" element={<AdminLogout />} />
             </Route>
 
-            <Route path="/receptionist" element={<ReceptionistDashboard />}>
+            <Route path="/receptionist" element={<AdminProtectedRoutes><ReceptionistDashboard /></AdminProtectedRoutes>}>
               <Route path="/receptionist/home" element={<ReceptionistHome />} />
               <Route path="/receptionist/appointments" element={<ReceptionistAppointments />} />
               <Route path="/receptionist/inbox" element={<ReceptionistInbox />} />
               <Route path="/receptionist/logout" element={<AdminLogout />} />
             </Route>
 
-            <Route path="/doctor" element={<DoctorDashboard />}>
+            <Route path="/doctor" element={<AdminProtectedRoutes><DoctorDashboard /></AdminProtectedRoutes>}>
             <Route path="/doctor/home" element={<DoctorHome />} />
               <Route path="/doctor/appointments" element={<DoctorAppointments />} />
               <Route path="/doctor/schedule" element={<DoctorSchedule />} />
               <Route path="/doctor/logout" element={<AdminLogout />} />
             </Route>
-            
+    
           </Routes>
         </BrowserRouter>
       </LocalizationProvider>

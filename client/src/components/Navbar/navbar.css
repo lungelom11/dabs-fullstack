@@ -102,12 +102,17 @@ nav {
   align-items: center;
   cursor: pointer;
 }
+
 .profile:hover {
   background-color: white;
 }
 
 .profile .pro_img {
   width: 50px;
+}
+
+.profile .pro_img img {
+  border-radius: 50%;
 }
 
 .profile .pro_info {
