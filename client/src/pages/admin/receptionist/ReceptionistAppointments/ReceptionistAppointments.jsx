@@ -7,20 +7,7 @@ import axios from "axios"
 const ReceptionistAppointments = () => {
   const url = "http://127.0.0.1:8000/appointments";
   const toast = useToast();
-  const deleteAppointment = async (id) => {
-    try {
-        const response = await axios.delete(url + `/${id}`);
-        toast({
-            title: "Appointment Deleted Successfully",
-            // description: "Redirecting to the dashboard",
-            status: "success",
-            duration: 5000,
-            isClosable: true,
-          });
-    } catch (error) {
-        console.log("An erro occured", error)
-    }
-  }
+ 
 
   return (
     <div className="manage-users-container">
@@ -33,7 +20,7 @@ const ReceptionistAppointments = () => {
       </TabList>
       <TabPanels>
         <TabPanel className="table-container">
-          <PendingTable deleteAppointment={deleteAppointment} />
+          <PendingTable />
         </TabPanel>
         <TabPanel className="table-container">
         <ActiveTable />

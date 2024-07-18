@@ -21,7 +21,7 @@ import { useEffect, useState } from 'react'
 import axios from "axios"
 import AppointmentModal from "./AppointmentModal"
 
-const PendingTable = ({deleteAppointment}) => {
+const PendingTable = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
     const [pendingAppoingments, setPendingAppoingments] = useState("")
     const url = "http://127.0.0.1:8000/appointments";
@@ -72,13 +72,6 @@ const PendingTable = ({deleteAppointment}) => {
                     <Td>{appointment.appointment_date} , {appointment.appointment_time}</Td>
                     <Td >{appointment.branch}</Td>
                     <Td>
-                        <span className="delete-icon" title='Delete Patient' onClick={() => {
-                          if (confirm("Are you sure you want to delete?")) {
-                            deleteAppointment(appointment._id)
-                          }
-                        }} >
-                            <i className="fa-solid fa-trash-can"></i>
-                        </span>
                         <Button colorScheme="green" onClick={()=> handleEditClick(appointment)}>Edit</Button>
                     </Td>
                     

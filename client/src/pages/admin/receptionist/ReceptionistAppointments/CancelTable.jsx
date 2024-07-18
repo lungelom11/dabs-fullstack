@@ -13,18 +13,23 @@ import {
     Input,
     useToast,
     Spinner,
+    Button,
+    Modal,
+    ModalOverlay,
+    useDisclosure,
   } from '@chakra-ui/react'
 
 import { useEffect, useState } from 'react'
 import axios from "axios"
+import AppointmentModal from "./AppointmentModal"
 
 
 const CancelTable = () => {
-
+    const { isOpen, onOpen, onClose } = useDisclosure()
     const url = "http://127.0.0.1:8000/appointments";
     const toast = useToast();
     const [cancelledAppointments, setCancelledAppointments] = useState("")
-
+    const [selectedAppointment,setSelectedAppointment] = useState("")
 
     useEffect(() => {
         const fetchCancelledAppointments = async () =>{
@@ -33,6 +38,11 @@ const CancelTable = () => {
         }
         fetchCancelledAppointments()
       }, [])
+
+      const handleEditClick = (appointment) => {
+        setSelectedAppointment(appointment);
+        onOpen();
+      };
 
 
   return (
@@ -65,14 +75,9 @@ const CancelTable = () => {
                         <Td>{appointment._id}</Td>
                     <Td>{appointment.patient_id}</Td>
                     <Td>{appointment.appointment_date} , {appointment.appointment_time}</Td>
-                    <Td >Brach</Td>
+                    <Td >{appointment.branch}</Td>
                     <Td>
-                        <span className="delete-icon" title='Delete Patient'>
-                            <i className="fa-solid fa-trash-can"></i>
-                        </span>
-                        <span className="view-icon" title='View Patient'>
-                        <i className="fa-solid fa-eye"></i>
-                        </span>
+                     <Button colorScheme="green" onClick={()=> handleEditClick(appointment)}>Edit</Button>
                     </Td>
                 </Tr>
                   ))
@@ -85,6 +90,11 @@ const CancelTable = () => {
            <h3>No cancellation requests</h3>
         </div>
         }
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay />
+        <AppointmentModal selectedAppointment={selectedAppointment} />
+      </Modal> 
     </>
   )
 }

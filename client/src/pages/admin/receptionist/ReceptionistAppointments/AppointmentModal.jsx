@@ -91,7 +91,7 @@ const AppointmentModal = ({selectedAppointment}) => {
               duration: 5000,
               isClosable: true,
             });
-            window.location.href = "/receptionist/appointments"
+            // window.location.href = "/receptionist/appointments"
           } else {
             toast({
               title: "An error occured",
@@ -138,7 +138,7 @@ const AppointmentModal = ({selectedAppointment}) => {
             </p>
             <p>
               <span className="data">Status:</span>
-              <span className={selectedAppointment.status == "Pending" ? "pending": selectedAppointment.status == "Cancelled"? "cancelled": "schedulled" }>{selectedAppointment.status}</span>
+              <span className={selectedAppointment.status == "Pending" ? "pending": selectedAppointment.status == "Cancelled"? "cancelled": "scheduled" }>{selectedAppointment.status}</span>
             </p>
             <p>
               <span className="data">Notes:</span>{selectedAppointment.notes}

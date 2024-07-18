@@ -14,17 +14,24 @@ import {
     useToast,
     Spinner,
     Container,
+    Button,
+    useDisclosure,
+    Modal,
+    ModalOverlay,
   } from '@chakra-ui/react'
 
 import { useEffect, useState } from 'react'
 import axios from "axios"
+import AppointmentModal from "./AppointmentModal"
 
 
 const ActiveTable = () => {
-
+    const { isOpen, onOpen, onClose } = useDisclosure()
     const url = "http://127.0.0.1:8000/appointments";
     const toast = useToast();
     const [activeAppointments, setActiveAppointments] = useState("")
+    const [selectedAppointment,setSelectedAppointment] = useState("")
+
 
 
     useEffect(() => {
@@ -35,7 +42,10 @@ const ActiveTable = () => {
         fetchActiveAppointments()
       }, [])
   
-      console.log()
+      const handleEditClick = (appointment) => {
+        setSelectedAppointment(appointment);
+        onOpen();
+      };
       
 
   return (
@@ -68,14 +78,9 @@ const ActiveTable = () => {
                         <Td>{appointment._id}</Td>
                     <Td>{appointment.patient_id}</Td>
                     <Td>{appointment.appointment_date} , {appointment.appointment_time}</Td>
-                    <Td >Brach</Td>
+                    <Td >{appointment.branch}</Td>
                     <Td>
-                        <span className="delete-icon" title='Delete Patient'>
-                            <i className="fa-solid fa-trash-can"></i>
-                        </span>
-                        <span className="view-icon" title='View Patient'>
-                        <i className="fa-solid fa-eye"></i>
-                        </span>
+                    <Button colorScheme="green" onClick={()=> handleEditClick(appointment)}>Edit</Button>
                     </Td>
                 </Tr>
                   ))
@@ -88,6 +93,11 @@ const ActiveTable = () => {
            <h3>No active appointments</h3>
         </div>
         }
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <AppointmentModal selectedAppointment={selectedAppointment} />
+      </Modal> 
     </>
   )
 }

@@ -1,8 +1,8 @@
-from fastapi import APIRouter, status, HTTPException, Query
+from fastapi import APIRouter, status, HTTPException, Query,Path
 from ..schemas import Appointment, AppointmentUpdate
 from ..database import appointment_collection
 from ..utils import generate_appointment_id
-from typing import Optional
+from typing import Optional, List
 
 router = APIRouter(
     prefix="/appointments",
@@ -23,6 +23,8 @@ async def get_appointments(
     
     appointments = await appointment_collection.find(query).to_list(None)
     return appointments
+
+
 
 # Get one appointment
 @router.get("/{id}", response_model=dict)
@@ -71,3 +73,20 @@ async def delete_appointment(id: int):
         raise HTTPException(status_code=404, detail="Appointment not found")
         
     return
+
+
+
+
+@router.get("/doctor/{doc_id}")
+async def get_appointments(
+    doc_id: int = Path(..., description="The ID of the doctor"),
+     status: str = Query("Scheduled", description="Filter appointments by status"),
+     branch: Optional[str] = Query(None, description="Filter appointments by branch")
+):
+    query = {"doc_id": doc_id, "status": status}
+
+    if branch:
+        query['branch'] = branch
+
+    appointments = await appointment_collection.find(query).to_list(None)
+    return appointments

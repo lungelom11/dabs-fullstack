@@ -66,18 +66,18 @@ const Navbar = () => {
                   </div>
                 ) : (
                   <div style={{display:"flex", gap:"10px"}}>
-                    <li>
-              <Menu>
-                <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                  Admin Area
-                </MenuButton>
-                <MenuList>
-                  <Link to="/doctor/home"><MenuItem>Doctor</MenuItem></Link>
-                  <Link to="/receptionist/home"><MenuItem>Receptionist</MenuItem></Link>
-                  <Link to="/admin/home"><MenuItem>Administrator</MenuItem></Link>
-                </MenuList>
-              </Menu>
-                   </li>
+                    <>
+                        <Menu>
+                          <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                            Admin Area
+                          </MenuButton>
+                          <MenuList>
+                            <Link to="/doctor/home"><MenuItem>Doctor</MenuItem></Link>
+                            <Link to="/receptionist/home"><MenuItem>Receptionist</MenuItem></Link>
+                            <Link to="/admin/home"><MenuItem>Administrator</MenuItem></Link>
+                          </MenuList>
+                        </Menu>
+                   </>
                     <Button colorScheme="blue" mr={4} variant="outline"  onClick={onOpen}>
                       Login
                     </Button>

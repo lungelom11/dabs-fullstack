@@ -27,10 +27,13 @@ import {
   } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import axios from "axios"
+import DoctorInfo from './DoctorInfo'
 
 
 const DoctorTable = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen: isFirstOpen, onOpen: onFirstOpen, onClose: onFirstClose } = useDisclosure();
+  const { isOpen: isSecondOpen, onOpen: onSecondOpen, onClose: onSecondClose } = useDisclosure();
+
     const [isLoading, setIsLoading] = useState(false)
     const [branchNumber, setBranchNumber] = useState(0)
     const [firstname, setFirstname] = useState('');
@@ -43,6 +46,7 @@ const DoctorTable = () => {
     const toast = useToast();
     const [doctors, setDoctors] = useState("");
     const [image_url,setImageUrl] = useState("");
+    const [selectedDoctor,setSelectedDoctor] = useState()
 
     const handleBranchNumberChange = (e) => {
         setBranchNumber(e.target.value)
@@ -98,7 +102,7 @@ const DoctorTable = () => {
       
         };
 
-        useEffect(() => {
+      useEffect(() => {
           const fetchDoctors = async () =>{
               const response = await axios.get(url + `/?role=doctor`)
               setDoctors(response.data)
@@ -117,10 +121,15 @@ const DoctorTable = () => {
         }
       }
 
+      const handleView = (doctor) => {
+        setSelectedDoctor(doctor);
+        onSecondOpen();
+      };
+
   return (
     <>
          <div className="top-elements">
-            <Button colorScheme='blue' variant="outline" onClick={onOpen}>
+            <Button colorScheme='blue' variant="outline" onClick={onFirstOpen}>
                 Create Doctor
             </Button>
             <InputGroup width="200px">
@@ -151,12 +160,7 @@ const DoctorTable = () => {
                     <Td>Dr {doctor.lastname}</Td>
                     <Td >{doctor.branches.join(', ')}</Td>
                     <Td>
-                        <span className="delete-icon" title='Delete Patient'>
-                            <i className="fa-solid fa-trash-can"></i>
-                        </span>
-                        <span className="view-icon" title='View Patient'>
-                        <i className="fa-solid fa-eye"></i>
-                        </span>
+                        <Button colorScheme="green" onClick={() => handleView(doctor)}>View</Button>
                     </Td>
                 </Tr>
                   ))
@@ -166,7 +170,7 @@ const DoctorTable = () => {
         </TableContainer>
         : <h4>Loading..</h4>}
         
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isFirstOpen} onClose={onFirstClose}>
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>Create New Doctor</ModalHeader>
@@ -224,6 +228,28 @@ const DoctorTable = () => {
               <Button type='submit' colorScheme='blue' isLoading={isLoading}>Register</Button>
             </ModalFooter>
             </form>
+          </ModalContent>
+        </Modal>
+
+
+        <Modal isOpen={isSecondOpen} onClose={onSecondClose} size="xl">
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Doctor Info</ModalHeader>
+            <ModalCloseButton />
+
+            <ModalBody>
+              <DoctorInfo doctor={selectedDoctor} />
+    
+            </ModalBody>
+  
+            <ModalFooter style={{display:"flex", gap:"10px"}}>
+                
+                <Button colorScheme="green">Update</Button>
+                <Button colorScheme="yellow">Set New Password</Button>
+                <Button colorScheme="red">Delete</Button>
+              
+            </ModalFooter>
           </ModalContent>
         </Modal>
     </>

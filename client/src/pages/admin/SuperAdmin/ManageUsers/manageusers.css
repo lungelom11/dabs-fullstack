@@ -38,3 +38,23 @@ Td .delete-icon,Td .view-icon{
 .upload-image-container{
     padding: 5px;
 }
+
+.doctor-modal-top{
+    display:  flex;
+    justify-content: space-between;
+}
+
+.doctor-modal-img{
+    width: 200px;
+}
+
+.doctor-modal-img img{
+    width: 100%;
+}
+
+.doctor-modal-contant{
+    border: 2px solid gray;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 1rem;
+}

@@ -45,3 +45,32 @@
 .rbc-past-date{
     background-color: black;
 }
+
+/* Docter Scheduled Appointments */
+
+.doctor-appointments-container{
+    margin: 1rem auto;
+}
+
+.tabs-container{
+    padding: 20px;
+    margin: 2rem 2rem;
+    border-radius: 20px;
+    box-shadow: 1px 1px 1px 1px gray;
+}
+
+.appointment-branch-container{
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
+.table-row{
+    cursor: pointer;
+    margin: 1rem;
+    box-shadow: 1px 1px 1px 1px gray;
+}
+
+.table-row:hover{
+    background-color: darkgray;
+}
