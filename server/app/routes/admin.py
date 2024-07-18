@@ -3,6 +3,18 @@ from ..schemas import Admin
 from ..database import admin_collection
 from ..utils import generate_admin_id, hash
 from typing import Optional
+from ..config import settings
+import cloudinary
+import cloudinary.uploader
+from cloudinary.utils import cloudinary_url
+
+# Configuration       
+cloudinary.config( 
+    cloud_name = "daq9lqayi", 
+    api_key = "198475924272853", 
+    api_secret = "qIJjqBXJJGtb8FIwk8Iso02XlfI",
+    secure=True
+)
 
 router = APIRouter(
     prefix="/admin",
@@ -19,15 +31,7 @@ async def get_admins(role: Optional[str] = Query(None, description="Role to filt
     admins = await admin_collection.find(query).to_list(None)
     return admins
 
-# Get single admin
-# @router.get("/{id}", response_model=dict)
-# async def get_admin(id: int):
-#     admin = await admin_collection.find_one({"_id": id})
-#     if admin:
-#         return admin
-#     else:
-#         raise HTTPException(status_code=404, detail=f"Admin with id {id} not found")
-# Get single admin by id and role
+
 @router.get("/{id}/{role}", response_model=dict)
 async def get_admin_by_id_and_role(id: int, role: str):
     admin = await admin_collection.find_one({"_id": id, "role": role})
@@ -50,6 +54,12 @@ async def create_admin(new_admin: Admin):
         admin_data = new_admin.dict()
         admin_data["_id"] = generate_admin_id()
         admin_data["password"] = hash(admin_data["password"])
+
+        # Upload and optimize doctor image
+        upload_result = cloudinary.uploader.upload(admin_data["image_url"], public_id="doctor_img")
+        secure_url = upload_result["secure_url"]
+        admin_data["image_url"] = secure_url
+        print(secure_url)
 
         # Insert into the collection
         resp = await admin_collection.insert_one(admin_data)
