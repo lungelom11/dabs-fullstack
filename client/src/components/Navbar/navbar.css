@@ -97,7 +97,7 @@ nav {
 }
 
 .profile {
-  width: 240px;
+  width: auto;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -112,7 +112,8 @@ nav {
 }
 
 .profile .pro_img img {
-  border-radius: 50%;
+  border-radius: 30%;
+  height: 50px;
 }
 
 .profile .pro_info {

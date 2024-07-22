@@ -1,6 +1,6 @@
 import "../Navbar/navbar.css";
 import { Link } from "react-router-dom";
-import { Modal, ModalOverlay, useDisclosure, Button } from "@chakra-ui/react";
+import { Modal, ModalOverlay, useDisclosure, Button, Spinner } from "@chakra-ui/react";
 import ModalBody from "../AdminModal";
 import Logo from "../../images/logo.png";
 import { useRef } from "react";
@@ -34,7 +34,9 @@ const Navbar = () => {
               </li>
               <li>
                 {loading ? (
-                  <p>Loading...</p>
+                  <div>
+                    <Spinner />
+                  </div>
                 ) : error ? (
                   <p>{error}</p>
                 ) : adminData ? (

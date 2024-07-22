@@ -47,7 +47,8 @@ import DoctorSearch from "./DoctorSearch";
 const PatientBook = () => {
   const url = "http://127.0.0.1:8000/appointments";
   const [timeSlot, setTimeSlot] = useState([]);
-  const [appointment_date, setAppointmentDate] = useState(null);
+  const today = dayjs();
+  const [appointment_date, setAppointmentDate] = useState(today);
   const [appointment_time, setAppointmentTime] = useState(null);
   const [reason, setReason] = useState('');
   const [notes, setNotes] = useState('');
@@ -66,6 +67,7 @@ const PatientBook = () => {
   const [doc_id, setDoctorId]  = useState("");
   const [branch, setBranch] = useState();
   const [bookedSlots, setBookedSlots] = useState([""]);
+ 
   
   useEffect(()=>{
     const {patient_id} = jwtDecode(token);
@@ -81,6 +83,7 @@ const PatientBook = () => {
     }
     fetchDoctors()
   },[])
+
 
   //Handling available and not available slots
   useEffect(() =>{
@@ -229,6 +232,7 @@ const PatientBook = () => {
             Select Date
           </span>
           <BookCalendar appointment_date={appointment_date} setAppointmentDate={setAppointmentDate} />
+         
         </div>
         <div className="time-pick-container">
           <span className="time-header">
